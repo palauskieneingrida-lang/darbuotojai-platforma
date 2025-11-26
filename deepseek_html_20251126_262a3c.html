@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darbuotojų Platforma</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { background: #2563eb; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .filters { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .filter-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        select, input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        .profiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .profile-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .profile-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .profile-name { font-weight: bold; font-size: 18px; }
+        .profile-city { color: #666; }
+        .profile-profession { background: #dcfce7; color: #166534; padding: 5px 10px; border-radius: 15px; font-size: 14px; }
+        .profile-actions { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-call { background: #16a34a; flex: 1; text-align: center; }
+        .btn-whatsapp { background: #22c55e; flex: 1; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛠️ Darbuotojų Platforma</h1>
+            <p>Raskite patikimus laikinus darbuotojus savo mieste</p>
+        </header>
+
+        <div class="filters">
+            <h2>Filtruoti darbuotojus</h2>
+            <div class="filter-group">
+                <label for="city">Miestas</label>
+                <select id="city">
+                    <option value="">Visi miestai</option>
+                    <option value="vilnius">Vilnius</option>
+                    <option value="kaunas">Kaunas</option>
+                    <option value="klaipeda">Klaipėda</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="profession">Specialybė</label>
+                <select id="profession">
+                    <option value="">Visos specialybės</option>
+                    <option value="statyba">Statyba</option>
+                    <option value="transportas">Transportas</option>
+                    <option value="apsauga">Apsauga</option>
+                </select>
+            </div>
+            <button onclick="filterProfiles()">Filtruoti</button>
+        </div>
+
+        <div class="profiles" id="profiles-container">
+            <!-- Profiliai bus sugeneruoti JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Pavyzdiniai profiliai
+        const profiles = [
+            { name: "Jonas Petraitis", city: "Vilnius", age: 28, profession: "statyba", phone: "+37061234567", availability: "Savaitgaliais" },
+            { name: "Petras Jonaitis", city: "Kaunas", age: 35, profession: "transportas", phone: "+37062345678", availability: "Vakarais" },
+            { name: "Ona Kazlauskienė", city: "Vilnius", age: 42, profession: "apsauga", phone: "+37063456789", availability: "Pilnu etatu" }
+        ];
+
+        function displayProfiles(profilesToShow) {
+            const container = document.getElementById('profiles-container');
+            container.innerHTML = '';
+
+            profilesToShow.forEach(profile => {
+                const profileCard = `
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div>
+                                <div class="profile-name">${profile.name}</div>
+                                <div class="profile-city">${profile.city} • ${profile.age}m.</div>
+                            </div>
+                            <span class="profile-profession">${profile.profession}</span>
+                        </div>
+                        <p><strong>Laisvas laikas:</strong> ${profile.availability}</p>
+                        <div class="profile-actions">
+                            <a href="tel:${profile.phone}" class="btn-call">📞 Skambinti</a>
+                            <a href="https://wa.me/${profile.phone.replace('+', '')}" class="btn-whatsapp" target="_blank">💬 WhatsApp</a>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += profileCard;
+            });
+        }
+
+        function filterProfiles() {
+            const city = document.getElementById('city').value;
+            const profession = document.getElementById('profession').value;
+
+            let filteredProfiles = profiles;
+
+            if (city) {
+                filteredProfiles = filteredProfiles.filter(profile => profile.city.toLowerCase() === city);
+            }
+
+            if (profession) {
+                filteredProfiles = filteredProfiles.filter(profile => profile.profession === profession);
+            }
+
+            displayProfiles(filteredProfiles);
+        }
+
+        // Pirma įkrovimas
+        displayProfiles(profiles);
+    </script>
+</body>
+</html>
