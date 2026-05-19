@@ -1,522 +1,413 @@
-* {
-  box-sizing: border-box;
-}
-
-/* ==========================================================================
-   LEDONAS RGB - CYBERPUNK BASE ENVIRONMENT
-   ========================================================================== */
-body {
-  color: #ffffff !important; /* Visiškas baltas tekstas aiškumui */
-  background: #05050a !important; /* Gili futuristinė nakties tamsa */
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  min-height: 100svh;
-  font-variation-settings: 'slnt' 0;
-  perspective: 1200px; /* Įjungiame 3D gylio pajautimą visam puslapiui */
-  overflow-x: hidden;
-}
-
-:root {
-  --hover-lift-amount: 10px; /* Padidintas pakilimas geresniam 3D efektui */
-  --hover-scale-amount: 1.05;
-  --hover-subtle-zoom-amount: 1.03;
-  --hover-shadow-color: rgba(0, 240, 255, 0.5);
-  --hover-transition-duration: 0.4s;
-  --hover-transition-timing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  --surface-transition-duration: 0.3s;
-  --surface-transition-timing: var(--ease-out-quad);
-  --submenu-animation-speed: 360ms;
-  --submenu-animation-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-html {
-  scrollbar-width: thin;
-  scrollbar-color: #ff0055 #05050a; /* Neoninė rausva slankiklio juosta */
-  scroll-behavior: smooth;
-  background-color: #05050a;
-}
-
-html[scroll-lock] {
-  overflow: hidden;
-}
-
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-img {
-  width: 100%;
-  height: auto;
-  transition: transform var(--hover-transition-duration) var(--hover-transition-timing);
-}
-
-input,
-textarea,
-select {
-  font: inherit;
-  border-radius: var(--style-border-radius-inputs);
-  background-color: #0a0a14 !important;
-  color: #00f0ff !important;
-  border: 1px solid #00f0ff !important;
-}
-
-input:hover,
-textarea:hover {
-  background-color: #101026 !important;
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-}
-
-select {
-  background-color: #0a0a14;
-  color: currentcolor;
-}
-
-/* ==========================================================================
-   INTERACTIVE 3D CARDS (Kolekcijos ir Produktai)
-   ========================================================================== */
-.collection-card,
-.featured-blog-posts-card,
-.product-card,
-.predictive-search-results__card--product,
-.predictive-search-results__card,
-.product-grid__item {
-  width: 100%;
-  position: relative;
-  height: 100%;
-  background: rgba(10, 10, 20, 0.6) !important;
-  border: 1px solid #00f0ff !important; /* Lazerinis melsvas rėmelis */
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15) !important;
-  transition: all var(--hover-transition-duration) var(--hover-transition-timing) !important;
-  transform-style: preserve-3d !important;
-}
-
-/* Įspūdingas 3D pasukimas ir neoninis švytėjimas užvedus pelę */
-.product-grid__item:hover,
-.collection-card:hover,
-.product-card:hover {
-  transform: translateY(-8px) rotateX(4deg) rotateY(-4deg) scale(1.02) !important;
-  border-color: #ff0055 !important; /* Keičia spalvą į rožinę */
-  box-shadow: -8px 8px 25px rgba(255, 0, 85, 0.5), 0 0 15px rgba(0, 240, 255, 0.3) !important;
-  z-index: var(--layer-flat) + 10;
-}
-
-/* Nuotraukos padidinimas karkaso viduje */
-.product-grid__item:hover img,
-.collection-card:hover .collection-card__image {
-  transform: scale(1.05);
-}
-
-/* Editorial layout */
-.resource-list:not(.hidden--desktop) .collection-card--flexible-aspect-ratio,
-.resource-list:not(.hidden--desktop) .blog-post-card--flexible-aspect-ratio {
-  .collection-card__image,
-  .featured-blog-posts-card__image,
-  .blog-placeholder-svg {
-    aspect-ratio: 99;
-    height: 100%;
-  }
-
-  .collection-card__inner,
-  .featured-blog-posts-card__inner {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .collection-card__content,
-  .featured-blog-posts-card__content {
-    flex-shrink: 0;
-  }
-
-  &:not(.collection-card--image-bg) .collection-card__content,
-  .featured-blog-posts-card__content {
-    height: auto;
-  }
-}
-
-.collection-card__inner,
-.featured-blog-posts-card__inner {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  z-index: var(--layer-flat);
-  pointer-events: none;
-}
-
-.collection-card__content,
-.featured-blog-posts-card__content {
-  display: flex;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  gap: var(--gap);
-}
-
-.collection-card__link,
-.featured-blog-posts-card__link {
-  position: absolute;
-  inset: 0;
-  border-radius: var(--border-radius);
-}
-
-.product-card__link {
-  position: absolute;
-  inset: 0;
-}
-
-.product-card__content {
-  position: relative;
-  cursor: pointer;
-}
-
-dialog {
-  --backdrop-color-rgb: var(--color-shadow-rgb);
-  background-color: #0a0a14;
-  color: #ffffff;
-  border: 1px solid #ff0055;
-  box-shadow: 0 0 30px rgba(255, 0, 85, 0.4);
-}
-
-p, h1, h2, h3, h4, h5, h6 {
-  overflow-wrap: break-word;
-}
-
-.wrap-text {
-  overflow-wrap: break-word;
-  word-break: break-word;
-  hyphens: auto;
-}
-
-p:empty {
-  display: none;
-}
-
-:first-child:is(p, h1, h2, h3, h4, h5, h6),
-:first-child:empty + :where(p, h1, h2, h3, h4, h5, h6) {
-  margin-block-start: 0;
-}
-
-:last-child:is(p, h1, h2, h3, h4, h5, h6),
-:where(p, h1, h2, h3, h4, h5, h6):nth-child(2):has(+ :last-child:empty) {
-  margin-block-end: 0;
-}
-
-/* ==========================================================================
-   LEDONAS RGB - ULTRA ANIMATED TYPOGRAPHY (Bėgančios spalvos)
-   ========================================================================== */
-@keyframes ledonasRgbFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-h1, .h1, h2, .h2 {
-  background: linear-gradient(90deg, #ff0055, #00f0ff, #00ff66, #9900ff, #ff0055) !important;
-  background-size: 300% 300% !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  text-fill-color: transparent !important;
-  animation: ledonasRgbFlow 4s linear infinite !important;
-  display: inline-block;
-  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1));
-}
-
-h3, .h3, h4, .h4, h5, h6 {
-  color: #00f0ff !important; /* Neoninė žydra smulkesniam tekstui */
-  text-shadow: 0 0 5px rgba(0, 240, 255, 0.6) !important;
-}
-
-:first-child:is(.h1, .h2, .h3, .h4, .h5, .h6) { margin-block-start: 0; }
-:last-child:is(.h1, .h2, .h3, .h4, .h5, .h6) { margin-block-end: 0; }
-
-/* Links */
-a {
-  --button-color: #00f0ff;
-  color: var(--button-color);
-  text-decoration-color: transparent;
-  transition: all 0.3s ease;
-}
-
-:is(h1, h2, h3, h4, h5, h6, p) > a:hover {
-  color: #ff0055 !important;
-  text-shadow: 0 0 10px #ff0055;
-}
-
-/* Layout options */
-.content-for-layout {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.content-for-layout > .shopify-section:last-child {
-  flex-grow: 1;
-}
-
-.page-width-wide, .page-width-normal, .page-width-narrow, .page-width-content {
-  --page-margin: 16px;
-}
-@media screen and (min-width: 750px) {
-  .page-width-wide, .page-width-normal, .page-width-narrow, .page-width-content {
-    --page-margin: 40px;
-  }
-}
-
-.page-width-wide {
-  --page-content-width: var(--wide-page-width);
-  --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
-}
-.page-width-normal {
-  --page-content-width: var(--normal-page-width);
-  --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
-}
-.page-width-narrow, .page-width-content {
-  --page-content-width: var(--narrow-page-width);
-  --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
-}
-.page-width-content {
-  --page-content-width: var(--normal-content-width);
-  --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
-}
-
-.section {
-  --full-page-grid-central-column-width: min(var(--page-width) - var(--page-margin) * 2, calc(100% - var(--page-margin) * 2));
-  --full-page-grid-margin: minmax(var(--page-margin), 1fr);
-  --full-page-grid-with-margins: var(--full-page-grid-margin) var(--full-page-grid-central-column-width) var(--full-page-grid-margin);
-  --util-page-margin-offset: max(var(--page-margin), calc((100% - min(var(--page-content-width), 100% - var(--page-margin) * 2)) / 2));
-  --full-page-margin-inline-offset: calc(((100vw - var(--full-page-grid-central-column-width)) / 2) * -1);
-  width: 100%;
-  position: relative;
-  display: grid;
-  grid-template-columns: var(--full-page-grid-with-margins);
-  min-height: var(--section-min-height, 'auto');
-}
-
-.section > * { grid-column: 2; }
-.shopify-section:not(.header-section) :is(.section, .cart-summary) { background: transparent; }
-.shopify-section:not(.header-section):has(.section) { position: relative; }
-.shopify-section:not(.header-section) .section-background {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: var(--layer-section-background);
-}
-
-.section--page-width > * { grid-column: 2; }
-.section--full-width > * { grid-column: 1 / -1; }
-
-@media screen and (max-width: 749px) {
-  .section--mobile-full-width > * { grid-column: 1 / -1; }
-}
-
-.section--page-width.section--full-width-right > * { grid-column: 2 / 4; }
-.section--full-width.section--full-width-margin > * {
-  grid-column: 1 / -1;
-  @media screen and (min-width: 750px) {
-    padding-left: var(--page-margin);
-    padding-right: var(--page-margin);
-  }
-}
-.section > .force-full-width { grid-column: 1 / -1; }
-.section--height-small { --section-min-height: var(--section-height-small); }
-.section--height-medium { --section-min-height: var(--section-height-medium); }
-.section--height-large { --section-min-height: var(--section-height-large); }
-.section--height-full-screen { --section-min-height: 100svh; }
-
-.section-content-wrapper.section-content-wrapper {
-  min-height: calc(var(--section-min-height, 'auto') - var(--section-height-offset, 0px));
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.hidden { display: none !important; }
-@media screen and (max-width: 749px) { .hidden--mobile, .mobile\:hidden { display: none !important; } }
-@media screen and (min-width: 750px) { .hidden--desktop, .desktop\:hidden { display: none !important; } }
-.hide-when-empty:empty { display: none !important; }
-
-.visually-hidden:not(:focus, :active) {
-  position: absolute !important;
-  overflow: hidden;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  clip: rect(0 0 0 0);
-  word-wrap: normal !important;
-}
-
-.contents { display: contents; }
-.flex { display: flex; gap: var(--gap-md); }
-
-.grid {
-  --centered-column-number: 12;
-  --full-width-column-number: 14;
-  --centered: column-1 / span var(--centered-column-number);
-  --full-width: column-0 / span var(--full-width-column-number);
-  display: flex;
-  flex-direction: column;
-}
-
-@media screen and (min-width: 750px) {
-  .grid {
-    display: grid;
-    gap: 0;
-    grid-template-columns: var(--margin-4xl) repeat(var(--centered-column-number), minmax(0, 1fr)) var(--margin-4xl);
-    grid-template-areas: 'column-0 column-1 column-2 column-3 column-4 column-5 column-6 column-7 column-8 column-9 column-10 column-11 column-12 column-13';
-  }
-}
-
-.flip-x { scale: -1 1; }
-.flip-y { scale: 1 -1; }
-.list-unstyled { margin: 0; padding: 0; list-style: none; }
-.text-left { text-align: left; }
-.text-center { text-align: center; }
-.text-right { text-align: right; }
-.text-inherit { color: inherit; }
-
-.background-image-container {
-  overflow: hidden;
-  position: absolute;
-  inset: 0;
-  opacity: 0.4 !important; /* Šiek tiek pritemdome fono nuotraukas, kad geriau šviestų RGB tekstas */
-}
-
-.background-image-container img,
-.background-image-container svg {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.relative { position: relative; }
-
-/* ==========================================================================
-   LEDONAS RGB - LAZERINIAI MYGTUKAI
-   ========================================================================== */
-.button,
-.button-secondary,
-button.shopify-payment-button__button--unbranded {
-  display: grid;
-  align-content: center;
-  text-decoration: none;
-  text-transform: uppercase !important; /* Griežtas ciber-stilius */
-  letter-spacing: 2px;
-  color: #00f0ff !important; /* Neoninis tekstas */
-  background-color: transparent !important; /* Tuščiaviduriai mygtukai */
-  border: 2px solid #00f0ff !important;
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0, 240, 255, 0.2) !important;
-  transition: all 0.3s ease-in-out !important;
-  cursor: pointer;
-  border-radius: 0px !important; /* Kampuoti futuristiniai mygtukai */
-}
-
-/* Mygtuko reakcija užvedus pelę */
-.button:hover,
-.button-secondary:hover,
-button.shopify-payment-button__button--unbranded:hover {
-  color: #ffffff !important;
-  background-color: #ff0055 !important; /* Užsipildo lazerine rožine */
-  border-color: #ff0055 !important;
-  box-shadow: 0 0 20px #ff0055, 0 0 40px rgba(255, 0, 85, 0.5) !important;
-  transform: scale(1.05) translateZ(10px);
-}
-/* ==========================================================================
-   LEDONAS RGB EFFEKTAI (Saugus kodas be rėmų)
-   ========================================================================== */
-
-/* Padarome gražų, vientisą tamsų foną visoms sekcijoms */
-body, .section, .shopify-section, .section-background {
-  background-color: #06060c !important;
-}
-
-/* Įjungiame bėgančių RGB spalvų animaciją dideliems užrašams */
-h1, .h1, h2, .h2, [class*="marquee"], [class*="heading"] {
-  background: linear-gradient(90deg, #ff0055, #00f0ff, #00ff66, #ff0055) !important;
-  background-size: 200% auto !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  text-fill-color: transparent !important;
-  display: inline-block !important;
-  animation: rgbSrautas 4s linear infinite !important;
-}
-
-@keyframes rgbSrautas {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
-}
-
-/* Sutvarkome mygtukus, kad derėtų prie stiliaus */
-.button, .button-secondary {
-  background: #ff0055 !important;
-  color: #ffffff !important;
-  border: none !important;
-  box-shadow: 0 0 15px rgba(255, 0, 87, 0.4) !important;
-}
 /* ==========================================================================
    LEDONAS BRAND - PREMIUM CYBERPUNK THEME
+   Versija: 2.0 | Optimizuota ir sutvarkyta
    ========================================================================== */
 
-/* Švelnus naktinis fonas visam puslapiui (ne akis rėžianti juoda) */
-body, html, .gradient {
-  background-color: #0b0b12 !important; /* Labai tamsi, prabangi indigo/pilka */
-  color: #f0f0f5 !important; /* Švelni balta tekstui, kad nerėžtų akių */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; /* Modernus, švarus šriftas vietoje kodo šrifto */
+/* --------------------------------------------------------------------------
+   1. CSS KINTAMIEJI — viena vieta viskam keisti
+   -------------------------------------------------------------------------- */
+:root {
+  --led-bg:           #0b0b12;
+  --led-surface:      #14141f;
+  --led-surface-alt:  #1a1a2e;
+  --led-border:       rgba(255, 255, 255, 0.06);
+  --led-border-hover: rgba(0, 240, 255, 0.45);
+
+  --led-cyan:         #00f0ff;
+  --led-magenta:      #ff0055;
+  --led-green:        #00ff66;
+  --led-white:        #f0f0f5;
+  --led-text-muted:   #7a7a9a;
+
+  --glow-cyan-sm:  0 0 10px rgba(0, 240, 255, 0.30);
+  --glow-cyan-md:  0 0 15px rgba(0, 240, 255, 0.15), 0 0 30px rgba(0, 240, 255, 0.08);
+  --glow-cyan-btn: 0 4px 15px rgba(0, 240, 255, 0.35);
+  --glow-magenta:  0 6px 20px rgba(255, 0, 85, 0.50);
+
+  --radius-card: 8px;
+  --radius-btn:  6px;
+
+  --font-ui:   -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --transition: 0.3s ease;
 }
 
-/* Antraštės – švarios, su lengvu neoniniu atspindžiu */
-h1, h2, h3, h4, .h1, .h2, .h3 {
+/* --------------------------------------------------------------------------
+   2. PAGRINDAS — fonas ir tipografija
+   -------------------------------------------------------------------------- */
+html,
+body {
+  background-color: var(--led-bg) !important;
+  color: var(--led-white) !important;
+  font-family: var(--font-ui) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Shopify temos .gradient klasė (Dawn, Sense ir kt.) */
+.gradient,
+.color-background-1,
+.color-background-2 {
+  background-color: var(--led-bg) !important;
+  background-image: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. ANTRAŠTĖS
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4 {
   color: #ffffff !important;
-  letter-spacing: 0.5px !important;
+  letter-spacing: 0.4px !important;
   text-transform: none !important;
-  text-shadow: 0 0 10px rgba(0, 240, 255, 0.3) !important; /* Vos pastebimas Cyan švytėjimas */
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.25) !important;
 }
 
-/* Nuorodos ir kainos, kurios turi subtiliai išsiskirti */
-.price, a, .accent-color {
-  color: #00f0ff !important; /* Švelni elektrinė melsva */
+/* --------------------------------------------------------------------------
+   4. NUORODOS IR AKCENTAI
+   -------------------------------------------------------------------------- */
+a {
+  color: var(--led-cyan) !important;
+  text-decoration: none;
+  transition: opacity var(--transition);
 }
 
-/* Prabangūs, modernūs mygtukai (suapvalinti kampai, be aštrių rėmų) */
-button, .button, .shopify-payment-button__button {
-  background: #00f0ff !important; /* Pagrindas – melsvas LED švytėjimas */
-  color: #000000 !important; /* Juodas tekstas ant mygtuko, kad būtų profesionalu */
+a:hover {
+  opacity: 0.8;
+  text-decoration: none;
+}
+
+.price,
+.price__regular,
+.price-item--regular,
+.accent-color {
+  color: var(--led-cyan) !important;
+}
+
+.price__sale,
+.price-item--sale {
+  color: var(--led-magenta) !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. MYGTUKAI
+   -------------------------------------------------------------------------- */
+button,
+.button,
+.btn,
+.shopify-payment-button__button,
+.product-form__submit {
+  background: var(--led-cyan) !important;
+  color: #000000 !important;
   border: none !important;
-  border-radius: 6px !important; /* Švelniai užapvalinti kampai */
+  border-radius: var(--radius-btn) !important;
+  font-family: var(--font-ui) !important;
   font-weight: 600 !important;
+  font-size: 0.9rem !important;
   letter-spacing: 0.5px !important;
-  box-shadow: 0 4px 15px rgba(0, 240, 255, 0.3) !important;
-  transition: all 0.3s ease !important;
+  box-shadow: var(--glow-cyan-btn) !important;
+  transition: background var(--transition),
+              color var(--transition),
+              box-shadow var(--transition),
+              transform var(--transition) !important;
+  cursor: pointer;
 }
 
-/* Užvedus pelę ant mygtuko – jis sušvinta magenta spalva */
-button:hover, .button:hover, .shopify-payment-button__button:hover {
-  background: #ff0055 !important;
+button:hover,
+.button:hover,
+.btn:hover,
+.shopify-payment-button__button:hover,
+.product-form__submit:hover {
+  background: var(--led-magenta) !important;
   color: #ffffff !important;
-  box-shadow: 0 6px 20px rgba(255, 0, 85, 0.5) !important;
-  transform: translateY(-1px) !important;
+  box-shadow: var(--glow-magenta) !important;
+  transform: translateY(-2px) !important;
 }
 
-/* Prekių kortelės (švarus, tamsus stiklo efektas - Glassmorphism) */
-.card, .card-wrapper, .product-card-wrapper {
-  background: rgba(20, 20, 35, 0.5) !important;
-  border: 1px solid rgba(255, 255, 255, 0.05) !important; /* Vos matomas rėmelis */
-  border-radius: 8px !important;
-  backdrop-filter: blur(10px) !important; /* Stiklo efektas */
+button:active,
+.button:active {
+  transform: translateY(0) !important;
 }
 
-/* Užvedus pelę ant prekės – išryškėja švelnus LED rėmelis */
-.card-wrapper:hover .card, .product-card-wrapper:hover {
-  border-color: rgba(0, 240, 255, 0.4) !important;
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15) !important;
+/* Antrinis (outline) mygtukas */
+.button--secondary,
+.button[aria-label*="secondary"] {
+  background: transparent !important;
+  color: var(--led-cyan) !important;
+  border: 1px solid var(--led-cyan) !important;
+  box-shadow: none !important;
+}
+
+.button--secondary:hover {
+  background: rgba(0, 240, 255, 0.1) !important;
+  box-shadow: var(--glow-cyan-sm) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. PREKIŲ KORTELĖS — Glassmorphism
+   -------------------------------------------------------------------------- */
+.card,
+.card-wrapper,
+.product-card-wrapper,
+.card__inner {
+  background: rgba(20, 20, 35, 0.55) !important;
+  border: 1px solid var(--led-border) !important;
+  border-radius: var(--radius-card) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  transition: border-color var(--transition),
+              box-shadow var(--transition),
+              transform var(--transition) !important;
+}
+
+/* Užvedus pelę — neoninis rėmelis */
+.card-wrapper:hover .card,
+.card-wrapper:hover,
+.product-card-wrapper:hover {
+  border-color: var(--led-border-hover) !important;
+  box-shadow: var(--glow-cyan-md) !important;
+  transform: translateY(-3px) !important;
+}
+
+/* Produkto nuotrauka */
+.card__media,
+.card__media img,
+.media img {
+  border-radius: calc(var(--radius-card) - 1px) var(--radius-card) 0 0 !important;
+  transition: transform 0.4s ease, filter 0.3s ease !important;
+}
+
+.card-wrapper:hover .card__media img,
+.product-card-wrapper:hover img {
+  transform: scale(1.04) !important;
+  filter: brightness(1.06) saturate(1.2) !important;
+}
+
+/* Kortelės apatinė dalis (pavadinimas, kaina) */
+.card__content,
+.card__information {
+  background: transparent !important;
+  padding: 14px 16px 16px !important;
+}
+
+.card__heading,
+.card__heading a {
+  color: var(--led-white) !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. HEADER
+   -------------------------------------------------------------------------- */
+.header-wrapper,
+.shopify-section-header {
+  background: rgba(11, 11, 18, 0.88) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.15) !important;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.6) !important;
+}
+
+.header__heading-link,
+.header__heading-logo {
+  color: #ffffff !important;
+}
+
+.header__menu-item a,
+.header__menu-item span,
+.list-menu__item a {
+  color: var(--led-white) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px !important;
+  transition: color var(--transition) !important;
+}
+
+.header__menu-item a:hover,
+.list-menu__item a:hover {
+  color: var(--led-cyan) !important;
+}
+
+.header__icon svg,
+.header__icon {
+  color: var(--led-white) !important;
+  fill: currentColor;
+  transition: color var(--transition) !important;
+}
+
+.header__icon:hover svg,
+.header__icon:hover {
+  color: var(--led-cyan) !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. HERO BANNER
+   -------------------------------------------------------------------------- */
+.banner,
+.hero,
+[class*="banner__"] {
+  background-color: var(--led-bg) !important;
+}
+
+.banner__heading,
+.hero__title {
+  color: #ffffff !important;
+  text-shadow: 0 0 30px rgba(0, 240, 255, 0.4) !important;
+}
+
+.banner__text,
+.hero__text {
+  color: rgba(240, 240, 245, 0.8) !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. SEKCIJŲ FONAS
+   -------------------------------------------------------------------------- */
+.shopify-section,
+section {
+  background-color: var(--led-bg) !important;
+}
+
+/* Kiekviena antra sekcija — šiek tiek šviesesnė */
+.shopify-section:nth-child(even) {
+  background-color: var(--led-surface) !important;
+}
+
+/* --------------------------------------------------------------------------
+   10. FORMOS IR INPUTAI
+   -------------------------------------------------------------------------- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+textarea,
+select,
+.field__input {
+  background: var(--led-surface-alt) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 6px !important;
+  color: var(--led-white) !important;
+  font-family: var(--font-ui) !important;
+  transition: border-color var(--transition), box-shadow var(--transition) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.field__input:focus {
+  border-color: var(--led-cyan) !important;
+  box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.20) !important;
+  outline: none !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--led-text-muted) !important;
+}
+
+label,
+.field__label {
+  color: var(--led-text-muted) !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* --------------------------------------------------------------------------
+   11. KREPŠELIS / CART
+   -------------------------------------------------------------------------- */
+.cart-drawer,
+.cart-notification {
+  background: var(--led-surface) !important;
+  border-left: 1px solid rgba(0, 240, 255, 0.2) !important;
+}
+
+.cart-drawer__header,
+.cart-notification__heading {
+  border-bottom: 1px solid var(--led-border) !important;
+  color: #ffffff !important;
+}
+
+.cart-item__name,
+.cart-item__title {
+  color: var(--led-white) !important;
+}
+
+.cart-item__price {
+  color: var(--led-cyan) !important;
+}
+
+/* --------------------------------------------------------------------------
+   12. FOOTER
+   -------------------------------------------------------------------------- */
+.footer {
+  background: var(--led-surface) !important;
+  border-top: 1px solid rgba(0, 240, 255, 0.12) !important;
+}
+
+.footer__heading {
+  color: #ffffff !important;
+  letter-spacing: 0.5px !important;
+}
+
+.footer a,
+.footer__link {
+  color: var(--led-text-muted) !important;
+  transition: color var(--transition) !important;
+}
+
+.footer a:hover,
+.footer__link:hover {
+  color: var(--led-cyan) !important;
+}
+
+.footer__content-bottom,
+.footer__copyright {
+  border-top: 1px solid var(--led-border) !important;
+  color: var(--led-text-muted) !important;
+}
+
+/* --------------------------------------------------------------------------
+   13. SCROLL BAR
+   -------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--led-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.35);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--led-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   14. TEKSTO PASIRINKIMAS
+   -------------------------------------------------------------------------- */
+::selection {
+  background: rgba(0, 240, 255, 0.22);
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   15. MOBILIEJI EKRANAI
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .card-wrapper:hover,
+  .product-card-wrapper:hover {
+    transform: none !important; /* Išjungiame hover translateY mobiliuose */
+  }
+
+  button,
+  .button {
+    font-size: 0.95rem !important;
+    padding: 14px 20px !important;
+  }
 }
