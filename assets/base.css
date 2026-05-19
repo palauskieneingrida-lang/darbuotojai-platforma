@@ -4212,4 +4212,70 @@ product-recommendations:has([data-has-recommendations='false']) {
     opacity: var(--atc-opacity, 1);
     translate: 0px var(--atc-destination, 0px);
   }
+}/* ==========================================================================
+   LEDONAS BRAND - CYBERPUNK BASE STYLES
+   ========================================================================== */
+
+/* 1. Pagrindinis puslapio fonas ir gylis */
+body, html, .gradient {
+  background-color: #030307 !important; /* Gili kosminė juoda */
+  color: #ffffff !important;
+  font-family: 'Courier New', Courier, monospace !important; /* Futuristinis High-Tech šriftas */
+  perspective: 1200px; /* Paruošiame erdvę būsimiems 3D efektams */
+  overflow-x: hidden;
+}
+
+/* Sklandus visų elementų perėjimas keičiantis būsenoms */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* 2. Neoninės Cyberpunk antraštės */
+h1, h2, h3, h4, .h1, .h2, .h3 {
+  color: #00f0ff !important; /* Elektrinė žydra (Cyan) */
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3) !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase;
+}
+
+/* Specialus akcentas svarbiausiems žodžiams/kainoms */
+.price, .accent-color, strong {
+  color: #ff0055 !important; /* Ryški neoninė magenta */
+  text-shadow: 0 0 8px rgba(255, 0, 85, 0.6) !important;
+}
+
+/* 3. Profesionalūs High-Tech mygtukai */
+button, .button, .shopify-payment-button__button {
+  background: rgba(5, 5, 10, 0.8) !important;
+  color: #00f0ff !important;
+  border: 2px solid #00f0ff !important;
+  border-radius: 0px !important; /* Griežti, aštrūs kampai */
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2), inset 0 0 10px rgba(0, 240, 255, 0.1) !important;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Mygtuko reakcija užvedus pelę */
+button:hover, .button:hover, .shopify-payment-button__button:hover {
+  color: #ffffff !important;
+  background: #ff0055 !important; /* Pasikeičia į rožinį lazerį */
+  border-color: #ff0055 !important;
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.6), inset 0 0 5px rgba(255, 0, 85, 0.4) !important;
+  transform: translateY(-2px); /* Lengvas pakilimas */
+}
+
+/* 4. Prekių kortelių (Product Cards) neoniniai rėmeliai */
+.card, .card-wrapper, .product-card-wrapper {
+  background: rgba(10, 10, 18, 0.6) !important;
+  border: 1px solid rgba(0, 240, 255, 0.2) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Kai pelė užvedama ant prekės kortelės */
+.card-wrapper:hover .card, .product-card-wrapper:hover {
+  border-color: #ff0055 !important; /* Rėmelis tampa neoninis rožinis */
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.4) !important;
 }
