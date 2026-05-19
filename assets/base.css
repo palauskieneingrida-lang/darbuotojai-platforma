@@ -4074,30 +4074,27 @@ product-recommendations:has([data-has-recommendations='false']) {
   transition: width var(--animation-speed) var(--animation-easing),
     opacity var(--animation-speed) var(--animation-easing);
 }
-/* ==========================================================================
-   LEDONAS RGB - ULTRA FORCED RAINBOW ANIMATION
-   ========================================================================== */
-
-/* Priverstinis RGB spalvų judėjimas antraštėms */
-h1, h2, .h1, .h2, [class*="heading"] {
-  background: linear-gradient(to right, #ff0055, #00f0ff, #00ff66, #ff0055) !important;
-  background-size: 200% auto !important;
+/* --- LEDONAS RGB EXCLUSIVE LAZER ANIMATION --- */
+.ledonas-rgb-lazeris {
+  background: linear-gradient(90deg, #ff0055, #00f0ff, #00ff66, #ff0055) !important;
+  background-size: 300% 300% !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   text-fill-color: transparent !important;
+  display: inline-block !important;
   
-  /* Įjungiame priverstinę animaciją */
-  animation: rgbShift 3s linear infinite !important;
-  display: inline-block !important; /* Reikalinga, kad suveiktų gradiento judėjimas */
+  /* Naudojame webkit, kad naršyklė privalomai suktų animaciją fone */
+  -webkit-animation: bėgantiŠviesa 3s linear infinite !important;
+  animation: bėgantiŠviesa 3s linear infinite !important;
 }
 
-/* Pačios animacijos judesys */
-@keyframes rgbShift {
-  0% {
-    background-position: 0% center !important;
-  }
-  100% {
-    background-position: 200% center !important;
-  }
+@-webkit-keyframes bėgantiŠviesa {
+  0% { background-position: 0% 50% !important; }
+  100% { background-position: 300% 50% !important; }
+}
+
+@keyframes bėgantiŠviesa {
+  0% { background-position: 0% 50% !important; }
+  100% { background-position: 300% 50% !important; }
 }
