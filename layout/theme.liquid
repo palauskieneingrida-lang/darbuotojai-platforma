@@ -133,6 +133,50 @@
 
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
-    {% endif %}
+    {% endif %}<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Funkcija, kuri paleidžia sekimą tik darbalaukyje (kompiuteriuose), kad telefone nestrigtų
+  if (window.innerWidth > 768) {
+    
+    // Kas 100 milisekundžių tikrinsime, ar puslapyje neatsirado naujų kortelių (pvz. po filtravimo)
+    setInterval(() => {
+      const cards = document.querySelectorAll('.card, .card-wrapper, .product-card-wrapper');
+      
+      cards.forEach(card => {
+        if (card.dataset.tiltDynamic) return; // Jei jau pritaikyta, praleidžiame
+        card.dataset.tiltDynamic = "true";
+        
+        // Nustatome bazinius CSS parametrus sklandžiam 3D gyliui
+        card.style.transformStyle = "preserve-3d";
+        card.style.perspective = "1000px";
+        
+        // Užvedus pelę
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left; 
+          const y = e.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          // Kampo apskaičiavimas (max 15 laipsnių pasukimas)
+          const rotateX = ((centerY - y) / centerY) * 15;
+          const rotateY = ((x - centerX) / centerX) * 15;
+          
+          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+          card.style.transition = "transform 0.1s ease";
+        });
+        
+        // Patraukus pelę - grąžiname į pradinę padėtį
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = "rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+          card.style.transition = "transform 0.5s ease";
+        });
+      });
+    }, 1000);
+    
+  }
+});
+</script>
   </body>
 </html>
