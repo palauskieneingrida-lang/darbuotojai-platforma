@@ -4074,6 +4074,44 @@ product-recommendations:has([data-has-recommendations='false']) {
   transition: width var(--animation-speed) var(--animation-easing),
     opacity var(--animation-speed) var(--animation-easing);
 }
+/* ==========================================================================
+   LEDONAS RGB - FUTURISTIC TEXT & GLOW EFFECTS
+   ========================================================================== */
+
+/* Pagrindinis puslapio fonas - gilus ciber-naktinis režimas */
+body, .gradient, .page-container {
+  background: #05050a !important;
+  color: #ffffff !important;
+}
+
+/* RGB Bėgančių spalvų efektas antraštėms */
+h1, h2, .interactive-rgb-text {
+  background: linear-gradient(to right, #ff0055, #00f0ff, #00ff66, #ff0055) !important;
+  background-size: 400% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: rgbShift 6s linear infinite !important;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.3) !important;
+}
+
+/* RGB spalvų judėjimo animacija */
+@keyframes rgbShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
+}
+
+/* Smulkesnės antraštės - Lazerinis rožinis švytėjimas */
+h3, h4, .card__heading a {
+  color: #ff0055 !important;
+  text-shadow: 0 0 8px #ff0055, 0 0 20px rgba(255, 0, 85, 0.5) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Užvedus pelę ant prekių pavadinimų - jie sušvinta žydrai */
+.card__heading a:hover {
+  color: #00f0ff !important;
+  text-shadow: 0 0 8px #00f0ff, 0 0 20px rgba(0, 240, 255, 0.8) !important;
+}
 /* --- LEDONAS FORCED CSS 3D TILT --- */
 
 /* Įjungiame 3D gylį visam produktų sąrašui */
