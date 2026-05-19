@@ -44,7 +44,22 @@
             "label": "EITI Į KOLEKCIJA",
             "link": "shopify://collections/all",
             "open_in_new_tab": false,
-            "style_class": "button",
+            "style_class": "button-secondary",
+            "width": "custom",
+            "custom_width": 44,
+            "width_mobile": "custom",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        },
+        "button_FcBw6C": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Susikurk pats!",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button-secondary",
             "width": "fit-content",
             "custom_width": 100,
             "width_mobile": "fit-content",
@@ -56,7 +71,8 @@
       "block_order": [
         "spacer_j7qAp7",
         "marquee_XmRqyc",
-        "button_ybwxjf"
+        "button_ybwxjf",
+        "button_FcBw6C"
       ],
       "custom_css": [
         ".spline {position: absolute; top: 0px; width: 100vw; height: 100vh;}",
@@ -78,24 +94,24 @@
         "open_in_new_tab": false,
         "content_direction": "row",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-start",
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "space-between",
-        "gap": 49,
+        "gap": 100,
         "section_width": "full-width",
-        "section_height": "medium",
+        "section_height": "large",
         "section_height_custom": 50,
         "color_scheme": "scheme-6",
         "toggle_overlay": false,
         "overlay_color": "#00000026",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
-        "blurred_reflection": false,
+        "blurred_reflection": true,
         "reflection_opacity": 75,
-        "padding-block-start": 0,
-        "padding-block-end": 40
+        "padding-block-start": 88,
+        "padding-block-end": 13
       }
     },
     "section_JpEEkW": {
@@ -181,37 +197,7 @@
                 "padding-inline-start": 40,
                 "padding-inline-end": 40
               },
-              "blocks": {
-                "text_FV4eEY": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "<p><br/>Atrask hipnotizuojantį RGB meną,</p><p> kuris peržengia standartinio interjero </p><p>ribas.<br/><br/></p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "center",
-                    "type_preset": "h2",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground-heading)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_FV4eEY"
-              ]
+              "blocks": {}
             }
           },
           "block_order": [
@@ -489,87 +475,6 @@
         "color_scheme": "scheme-2",
         "padding-block-start": 20,
         "padding-block-end": 20
-      }
-    },
-    "hero_pjNAy4": {
-      "type": "hero",
-      "blocks": {
-        "group_hBqcgn": {
-          "type": "group",
-          "name": "t:names.group",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 16,
-            "width": "custom",
-            "custom_width": 50,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "group_hBqcgn"
-      ],
-      "name": "t:names.hero",
-      "settings": {
-        "media_type_1": "image",
-        "image_1": "shopify://shop_images/ewf.png",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-start",
-        "gap": 0,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 5,
-        "color_scheme": "scheme-6",
-        "toggle_overlay": true,
-        "overlay_color": "#03030352",
-        "overlay_style": "gradient",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 72,
-        "padding-block-end": 64
       }
     },
     "section_x8mrnx": {
@@ -861,7 +766,6 @@
     "hero_hRhTz6",
     "section_JpEEkW",
     "product_list_themegen",
-    "hero_pjNAy4",
     "section_x8mrnx",
     "media_with_content_7nKFKW",
     "custom_liquid_xVzfYR",
