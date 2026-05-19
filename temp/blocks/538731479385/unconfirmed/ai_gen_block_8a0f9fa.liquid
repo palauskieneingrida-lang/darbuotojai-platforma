@@ -1,6 +1,885 @@
+{% doc %}
+  @prompt
+    Create a "Lifestyle Grid" section that showcases collection artworks displayed in real interior spaces. Layout: asymmetric, modern photo grid with varied image sizes (masonry or CSS grid with different column spans). Visual style: dark, moody rooms (bedroom, gaming setup, loft) where the artwork on the wall is the primary light source — glowing neon art illuminating the surrounding space. The grid should feel editorial and aspirational, evoking a "I want this in my room" feeling. Include a section heading and optional subheading. Each grid item can have an optional caption or product link overlay on hover. Maintain a dark background with the cyberpunk neon aesthetic consistent with the store's overall design language.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-lifestyle-grid-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding }}px 20px;
+  }
+
+  .ai-lifestyle-grid__container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .ai-lifestyle-grid__header-{{ ai_gen_id }} {
+    text-align: {{ block.settings.text_alignment }};
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-lifestyle-grid__heading-{{ ai_gen_id }} {
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+    margin: 0 0 {{ block.settings.subheading_spacing }}px;
+    text-transform: {{ block.settings.heading_transform }};
+    letter-spacing: 1px;
+  }
+
+  .ai-lifestyle-grid__subheading-{{ ai_gen_id }} {
+    color: {{ block.settings.subheading_color }};
+    font-size: {{ block.settings.subheading_size }}px;
+    margin: 0;
+    opacity: 0.9;
+  }
+
+  .ai-lifestyle-grid__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+    margin-top: {{ block.settings.grid_top_margin }}px;
+  }
+
+  .ai-lifestyle-grid__item-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    background-color: {{ block.settings.item_background }};
+    cursor: pointer;
+    transition: transform 0.4s ease;
+  }
+
+  .ai-lifestyle-grid__item-{{ ai_gen_id }}:hover {
+    transform: scale(1.02);
+  }
+
+  .ai-lifestyle-grid__item-{{ ai_gen_id }}--span-2 {
+    grid-column: span 2;
+  }
+
+  .ai-lifestyle-grid__item-{{ ai_gen_id }}--span-row-2 {
+    grid-row: span 2;
+  }
+
+  .ai-lifestyle-grid__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+  }
+
+  .ai-lifestyle-grid__item-{{ ai_gen_id }}--span-2 .ai-lifestyle-grid__image-wrapper-{{ ai_gen_id }} {
+    padding-bottom: 50%;
+  }
+
+  .ai-lifestyle-grid__item-{{ ai_gen_id }}--span-row-2 .ai-lifestyle-grid__image-wrapper-{{ ai_gen_id }} {
+    padding-bottom: 200%;
+  }
+
+  .ai-lifestyle-grid__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .ai-lifestyle-grid__item-{{ ai_gen_id }}:hover .ai-lifestyle-grid__image-{{ ai_gen_id }} {
+    transform: scale(1.05);
+  }
+
+  .ai-lifestyle-grid__placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-lifestyle-grid__placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-lifestyle-grid__overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+  }
+
+  .ai-lifestyle-grid__item-{{ ai_gen_id }}:hover .ai-lifestyle-grid__overlay-{{ ai_gen_id }} {
+    opacity: 1;
+  }
+
+  .ai-lifestyle-grid__caption-{{ ai_gen_id }} {
+    color: {{ block.settings.caption_color }};
+    font-size: {{ block.settings.caption_size }}px;
+    margin: 0 0 10px;
+    transform: translateY(20px);
+    transition: transform 0.4s ease 0.1s;
+  }
+
+  .ai-lifestyle-grid__item-{{ ai_gen_id }}:hover .ai-lifestyle-grid__caption-{{ ai_gen_id }} {
+    transform: translateY(0);
+  }
+
+  .ai-lifestyle-grid__link-{{ ai_gen_id }} {
+    color: {{ block.settings.link_color }};
+    font-size: {{ block.settings.link_size }}px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transform: translateY(20px);
+    transition: transform 0.4s ease 0.2s, color 0.3s ease;
+  }
+
+  .ai-lifestyle-grid__item-{{ ai_gen_id }}:hover .ai-lifestyle-grid__link-{{ ai_gen_id }} {
+    transform: translateY(0);
+  }
+
+  .ai-lifestyle-grid__link-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.link_hover_color }};
+  }
+
+  .ai-lifestyle-grid__link-arrow-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-lifestyle-grid__link-{{ ai_gen_id }}:hover .ai-lifestyle-grid__link-arrow-{{ ai_gen_id }} {
+    transform: translateX(4px);
+  }
+
+  .ai-lifestyle-grid__glow-effect-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 60%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle,
+      {{ block.settings.glow_color }} 0%,
+      rgba(255, 0, 255, 0.3) 30%,
+      rgba(0, 255, 255, 0.2) 50%,
+      transparent 70%
+    );
+    opacity: {{ block.settings.glow_opacity | divided_by: 100.0 }};
+    pointer-events: none;
+    mix-blend-mode: screen;
+    filter: blur(40px);
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-lifestyle-grid__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ai-lifestyle-grid__heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.7);
+    }
+
+    .ai-lifestyle-grid__subheading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subheading_size }}px * 0.9);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-lifestyle-grid-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding | times: 0.6 }}px 16px;
+    }
+
+    .ai-lifestyle-grid__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+      gap: {{ block.settings.grid_gap | times: 0.7 }}px;
+    }
+
+    .ai-lifestyle-grid__item-{{ ai_gen_id }}--span-2,
+    .ai-lifestyle-grid__item-{{ ai_gen_id }}--span-row-2 {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
+    .ai-lifestyle-grid__item-{{ ai_gen_id }}--span-2 .ai-lifestyle-grid__image-wrapper-{{ ai_gen_id }},
+    .ai-lifestyle-grid__item-{{ ai_gen_id }}--span-row-2 .ai-lifestyle-grid__image-wrapper-{{ ai_gen_id }} {
+      padding-bottom: 100%;
+    }
+
+    .ai-lifestyle-grid__overlay-{{ ai_gen_id }} {
+      padding: 20px;
+    }
+
+    .ai-lifestyle-grid__heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.5);
+    }
+  }
+{% endstyle %}
+
+<lifestyle-grid-{{ ai_gen_id }} class="ai-lifestyle-grid-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-lifestyle-grid__container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank or block.settings.subheading != blank %}
+      <div class="ai-lifestyle-grid__header-{{ ai_gen_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-lifestyle-grid__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+        {% if block.settings.subheading != blank %}
+          <p class="ai-lifestyle-grid__subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-lifestyle-grid__grid-{{ ai_gen_id }}">
+      {% for i in (1..6) %}
+        {% liquid
+          assign image_key = 'image_' | append: i
+          assign caption_key = 'caption_' | append: i
+          assign link_key = 'link_' | append: i
+          assign link_text_key = 'link_text_' | append: i
+          assign span_key = 'span_' | append: i
+
+          assign item_image = block.settings[image_key]
+          assign item_caption = block.settings[caption_key]
+          assign item_link = block.settings[link_key]
+          assign item_link_text = block.settings[link_text_key]
+          assign item_span = block.settings[span_key]
+        %}
+
+        <div class="ai-lifestyle-grid__item-{{ ai_gen_id }} ai-lifestyle-grid__item-{{ ai_gen_id }}--{{ item_span }}">
+          <div class="ai-lifestyle-grid__image-wrapper-{{ ai_gen_id }}">
+            {% if item_image %}
+              <img
+                src="{{ item_image | image_url: width: 1200 }}"
+                alt="{{ item_image.alt | escape }}"
+                class="ai-lifestyle-grid__image-{{ ai_gen_id }}"
+                loading="lazy"
+                width="{{ item_image.width }}"
+                height="{{ item_image.height }}"
+              >
+            {% else %}
+              <div class="ai-lifestyle-grid__placeholder-{{ ai_gen_id }}">
+                {{ 'lifestyle-1' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+
+            {% if block.settings.show_glow %}
+              <div class="ai-lifestyle-grid__glow-effect-{{ ai_gen_id }}"></div>
+            {% endif %}
+
+            {% if item_caption != blank or item_link != blank %}
+              <div class="ai-lifestyle-grid__overlay-{{ ai_gen_id }}">
+                {% if item_caption != blank %}
+                  <p class="ai-lifestyle-grid__caption-{{ ai_gen_id }}">{{ item_caption }}</p>
+                {% endif %}
+                {% if item_link != blank %}
+                  <a href="{{ item_link }}" class="ai-lifestyle-grid__link-{{ ai_gen_id }}">
+                    {{ item_link_text }}
+                    <svg class="ai-lifestyle-grid__link-arrow-{{ ai_gen_id }}" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M1 8h14M9 2l6 6-6 6"/>
+                    </svg>
+                  </a>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</lifestyle-grid-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class LifestyleGrid{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.items = this.querySelectorAll('.ai-lifestyle-grid__item-{{ ai_gen_id }}');
+        this.setupAccessibility();
+      }
+
+      setupAccessibility() {
+        this.items.forEach((item) => {
+          const link = item.querySelector('.ai-lifestyle-grid__link-{{ ai_gen_id }}');
+          if (link) {
+            item.setAttribute('role', 'article');
+          }
+        });
+      }
+    }
+
+    customElements.define('lifestyle-grid-{{ ai_gen_id }}', LifestyleGrid{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Lifestyle grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Art in Real Spaces"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "See how our neon artworks transform living spaces"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "heading_transform",
+      "label": "Heading text case",
+      "options": [
+        {
+          "value": "none",
+          "label": "Default"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "header",
+      "content": "Grid layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "grid_top_margin",
+      "label": "Grid top margin",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Grid item 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "span_1",
+      "label": "Size",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "span-2",
+          "label": "Wide (2 columns)"
+        },
+        {
+          "value": "span-row-2",
+          "label": "Tall (2 rows)"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "text",
+      "id": "caption_1",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_1",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text_1",
+      "label": "Link text",
+      "default": "Shop now"
+    },
+    {
+      "type": "header",
+      "content": "Grid item 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "span_2",
+      "label": "Size",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "span-2",
+          "label": "Wide (2 columns)"
+        },
+        {
+          "value": "span-row-2",
+          "label": "Tall (2 rows)"
+        }
+      ],
+      "default": "span-2"
+    },
+    {
+      "type": "text",
+      "id": "caption_2",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_2",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text_2",
+      "label": "Link text",
+      "default": "Shop now"
+    },
+    {
+      "type": "header",
+      "content": "Grid item 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "span_3",
+      "label": "Size",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "span-2",
+          "label": "Wide (2 columns)"
+        },
+        {
+          "value": "span-row-2",
+          "label": "Tall (2 rows)"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "text",
+      "id": "caption_3",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_3",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text_3",
+      "label": "Link text",
+      "default": "Shop now"
+    },
+    {
+      "type": "header",
+      "content": "Grid item 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "span_4",
+      "label": "Size",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "span-2",
+          "label": "Wide (2 columns)"
+        },
+        {
+          "value": "span-row-2",
+          "label": "Tall (2 rows)"
+        }
+      ],
+      "default": "span-row-2"
+    },
+    {
+      "type": "text",
+      "id": "caption_4",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_4",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text_4",
+      "label": "Link text",
+      "default": "Shop now"
+    },
+    {
+      "type": "header",
+      "content": "Grid item 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "span_5",
+      "label": "Size",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "span-2",
+          "label": "Wide (2 columns)"
+        },
+        {
+          "value": "span-row-2",
+          "label": "Tall (2 rows)"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "text",
+      "id": "caption_5",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_5",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text_5",
+      "label": "Link text",
+      "default": "Shop now"
+    },
+    {
+      "type": "header",
+      "content": "Grid item 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "span_6",
+      "label": "Size",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "span-2",
+          "label": "Wide (2 columns)"
+        },
+        {
+          "value": "span-row-2",
+          "label": "Tall (2 rows)"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "text",
+      "id": "caption_6",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_6",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text_6",
+      "label": "Link text",
+      "default": "Shop now"
+    },
+    {
+      "type": "header",
+      "content": "Visual effects"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_glow",
+      "label": "Show neon glow effect",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "glow_opacity",
+      "label": "Glow opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "glow_color",
+      "label": "Glow color",
+      "default": "#ff00ff"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "item_background",
+      "label": "Item background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading",
+      "default": "#e7e4e4"
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Caption",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link",
+      "default": "#ff00ff"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover",
+      "default": "#00ffff"
+    },
+    {
+      "type": "header",
+      "content": "Overlay text"
+    },
+    {
+      "type": "range",
+      "id": "caption_size",
+      "label": "Caption size",
+      "min": 12,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "link_size",
+      "label": "Link size",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 20,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Header spacing",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "subheading_spacing",
+      "label": "Subheading spacing",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lifestyle grid"
+    }
+  ]
+}
 {% endschema %}
