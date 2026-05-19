@@ -16,7 +16,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>Rgb judantys paveikslai{{ metaobjects[\"shopify--lighting-features\"][\"led-lighting\"].label.value }}</h2>",
+            "text": "<h2>Rgb judantys paveikslai</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
