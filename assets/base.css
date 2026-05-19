@@ -4074,7 +4074,39 @@ product-recommendations:has([data-has-recommendations='false']) {
   transition: width var(--animation-speed) var(--animation-easing),
     opacity var(--animation-speed) var(--animation-easing);
 }
+/* --- LEDONAS FORCED CSS 3D TILT --- */
 
+/* Įjungiame 3D gylį visam produktų sąrašui */
+.grid, .product-grid, .contains-card {
+  perspective: 1000px !important;
+  transform-style: preserve-3d !important;
+}
+
+/* Paverčiame prekių korteles, nuotraukas ir banerius plūduriuojančiais objektais */
+.card, .card-wrapper, .product-card-wrapper, .media img, .banner {
+  transform-style: preserve-3d !important;
+  backface-visibility: hidden;
+  will-change: transform, box-shadow;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* Agresyvus 3D iššokimas ir pasisukimas užvedus pelę */
+.card-wrapper:hover .card, 
+.card:hover, 
+.product-card-wrapper:hover,
+.banner:hover {
+  /* Kortelė pasisuka kampu, pakyla į viršų ir iššoka link kliento (translateZ) */
+  transform: rotateX(6deg) rotateY(-6deg) translateY(-8px) translateZ(30px) !important;
+  
+  /* Galingas LED šviesos sklidimo šešėlis iš po kortelės */
+  box-shadow: -10px 15px 30px rgba(255, 0, 85, 0.4), 10px -5px 20px rgba(0, 240, 255, 0.3) !important;
+  border-color: #ff0055 !important;
+}
+
+/* Padarome, kad pati nuotrauka kortelės viduje dar labiau iššoktų į priekį */
+.card-wrapper:hover .media img {
+  transform: translateZ(15px) scale(1.03) !important;
+}
 .add-to-cart__added {
   --atc-opacity: 1;
   --atc-destination: 0px;
