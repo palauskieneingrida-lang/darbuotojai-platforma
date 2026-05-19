@@ -83,38 +83,55 @@
         "collection_color_scheme": "default"
       }
     },
-    "divider_nCa6KC": {
-      "type": "divider",
-      "name": "t:names.divider_section",
+    "header_announcements_JEGwK3": {
+      "type": "header-announcements",
+      "blocks": {
+        "announcement_nR7PKE": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "<a href=\"/pages/contact\" title=\"Contact\">Sukursime tai ka sugalvosit SUSISIEKIT</a>",
+            "link": "",
+            "font": "var(--font-body--family)",
+            "font_size": "0.75rem",
+            "weight": "300",
+            "letter_spacing": "normal",
+            "case": "uppercase"
+          },
+          "blocks": {}
+        },
+        "announcement_TkXhf9": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "Rankų darbo",
+            "link": "shopify://collections/all",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "announcement_nR7PKE",
+        "announcement_TkXhf9"
+      ],
+      "name": "t:names.announcement_bar",
       "settings": {
-        "color_scheme": "",
+        "speed": 5,
         "section_width": "full-width",
-        "thickness": 1,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 16,
-        "padding-block-end": 16
-      }
-    },
-    "divider_9jCfad": {
-      "type": "divider",
-      "name": "t:names.divider_section",
-      "settings": {
-        "color_scheme": "",
-        "section_width": "full-width",
-        "thickness": 3.5,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 16,
-        "padding-block-end": 16
+        "color_scheme": "scheme-neon-rgb",
+        "divider_width": 0,
+        "padding-block-start": 15,
+        "padding-block-end": 15
       }
     }
   },
   "order": [
     "header_section",
-    "divider_nCa6KC",
-    "divider_9jCfad"
+    "header_announcements_JEGwK3"
   ]
 }
