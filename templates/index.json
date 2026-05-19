@@ -12,29 +12,29 @@
     "hero_hRhTz6": {
       "type": "hero",
       "blocks": {
-        "spacer_j7qAp7": {
-          "type": "spacer",
+        "text_bVCHex": {
+          "type": "text",
+          "name": "t:names.heading",
           "settings": {
-            "size": "pixel",
-            "percent_size": 100,
-            "pixel_size": 24,
-            "custom_mobile_size": false,
-            "size_mobile": "percent",
-            "percent_size_mobile": 100,
-            "pixel_size_mobile": 120
-          },
-          "blocks": {}
-        },
-        "marquee_XmRqyc": {
-          "type": "_marquee",
-          "settings": {
-            "movement_direction": "normal",
-            "inherit_color_scheme": false,
-            "color_scheme": "scheme-neon-rgb",
-            "transparent_background": true,
-            "padding-block-start": 24,
-            "padding-block-end": 24,
-            "gap_between_elements": 24
+            "text": "<h2>Rgb judantys paveikslai{{ metaobjects[\"shopify--lighting-features\"][\"led-lighting\"].label.value }}</h2>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -45,9 +45,9 @@
             "link": "shopify://collections/all",
             "open_in_new_tab": false,
             "style_class": "button-secondary",
-            "width": "custom",
-            "custom_width": 44,
-            "width_mobile": "custom",
+            "width": "fit-content",
+            "custom_width": 80,
+            "width_mobile": "fit-content",
             "custom_width_mobile": 100
           },
           "blocks": {}
@@ -69,8 +69,7 @@
         }
       },
       "block_order": [
-        "spacer_j7qAp7",
-        "marquee_XmRqyc",
+        "text_bVCHex",
         "button_ybwxjf",
         "button_FcBw6C"
       ],
@@ -104,11 +103,11 @@
         "section_height": "large",
         "section_height_custom": 50,
         "color_scheme": "scheme-6",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
+        "toggle_overlay": true,
+        "overlay_color": "#2f282826",
         "overlay_style": "gradient",
-        "gradient_direction": "to top",
-        "blurred_reflection": true,
+        "gradient_direction": "to bottom",
+        "blurred_reflection": false,
         "reflection_opacity": 75,
         "padding-block-start": 88,
         "padding-block-end": 13
@@ -236,540 +235,10 @@
         "padding-block-start": 40,
         "padding-block-end": 20
       }
-    },
-    "product_list_themegen": {
-      "type": "product-list",
-      "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "disabled": true,
-          "static": true,
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_Bd9pVh": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-heading--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_Bd9pVh"
-          ]
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 16,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 16,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_PhczVC": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "portrait",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 8,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "group_McqFAT": {
-              "type": "_product-card-group",
-              "name": "t:names.group",
-              "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 4,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "link": "",
-                "open_in_new_tab": false,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "text_MEKzFi": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "<h5>{{ closest.product.title }}</h5>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h4",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1.125rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "price_37riDf": {
-                  "type": "price",
-                  "name": "t:names.product_price",
-                  "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": false,
-                    "show_tax_info": false,
-                    "type_preset": "custom",
-                    "width": "100%",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1.125rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "color": "var(--color-foreground)",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "swatches_87VJC8": {
-                  "type": "swatches",
-                  "name": "t:names.swatches",
-                  "settings": {
-                    "product_swatches_alignment": "flex-start",
-                    "product_swatches_alignment_mobile": "flex-start",
-                    "hide_padding": false,
-                    "product_swatches_padding_top": 4,
-                    "product_swatches_padding_bottom": 0,
-                    "product_swatches_padding_left": 0,
-                    "product_swatches_padding_right": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_MEKzFi",
-                "price_37riDf",
-                "swatches_87VJC8"
-              ]
-            }
-          },
-          "block_order": [
-            "product_card_gallery_PhczVC",
-            "group_McqFAT"
-          ]
-        }
-      },
-      "name": "t:names.products_grid",
-      "settings": {
-        "collection": "asset-pack-29515841538-example-products",
-        "layout_type": "carousel",
-        "carousel_on_mobile": false,
-        "max_products": 4,
-        "columns": 3,
-        "mobile_columns": "1",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 20,
-        "rows_gap": 36,
-        "icons_style": "arrow",
-        "icons_shape": "circle",
-        "section_width": "page-width",
-        "horizontal_alignment": "center",
-        "gap": 40,
-        "color_scheme": "scheme-2",
-        "padding-block-start": 20,
-        "padding-block-end": 20
-      }
-    },
-    "section_x8mrnx": {
-      "type": "section",
-      "blocks": {
-        "group_QGT49U": {
-          "type": "group",
-          "name": "t:names.group",
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "center",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 4,
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "icon_6fDkMD": {
-              "type": "icon",
-              "name": "t:names.icon",
-              "settings": {
-                "icon": "star",
-                "width": 24,
-                "link": "",
-                "open_in_new_tab": false
-              },
-              "blocks": {}
-            },
-            "icon_jPwxht": {
-              "type": "icon",
-              "name": "t:names.icon",
-              "settings": {
-                "icon": "star",
-                "width": 24,
-                "link": "",
-                "open_in_new_tab": false
-              },
-              "blocks": {}
-            },
-            "icon_BqyFk8": {
-              "type": "icon",
-              "name": "t:names.icon",
-              "settings": {
-                "icon": "star",
-                "width": 24,
-                "link": "",
-                "open_in_new_tab": false
-              },
-              "blocks": {}
-            },
-            "icon_ytB6b9": {
-              "type": "icon",
-              "name": "t:names.icon",
-              "settings": {
-                "icon": "star",
-                "width": 24,
-                "link": "",
-                "open_in_new_tab": false
-              },
-              "blocks": {}
-            },
-            "icon_iKWQ4L": {
-              "type": "icon",
-              "name": "t:names.icon",
-              "settings": {
-                "icon": "star",
-                "width": 24,
-                "link": "",
-                "open_in_new_tab": false
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "icon_6fDkMD",
-            "icon_jPwxht",
-            "icon_BqyFk8",
-            "icon_ytB6b9",
-            "icon_iKWQ4L"
-          ]
-        },
-        "text_eFMntb": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Neon Noir champions the fusion of minimalism and neon energy, setting new trends in tech accessories.</p>",
-            "width": "100%",
-            "max_width": "narrow",
-            "alignment": "center",
-            "type_preset": "h3",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "button_TmU98M": {
-          "type": "button",
-          "settings": {
-            "label": "Shop now →",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "link",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "group_QGT49U",
-        "text_eFMntb",
-        "button_TmU98M"
-      ],
-      "name": "t:names.pull_quote",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "center",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 40,
-        "section_width": "page-width",
-        "section_height": "small",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-2",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 64,
-        "padding-block-end": 64
-      }
-    },
-    "media_with_content_7nKFKW": {
-      "type": "media-with-content",
-      "blocks": {
-        "media": {
-          "type": "_media-without-appearance",
-          "static": true,
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/51d3ef91124fca3bf55cf8c010a2aac8.png",
-            "link": "",
-            "video_loop": true,
-            "video_autoplay": false,
-            "image_position": "cover",
-            "video_position": "cover"
-          },
-          "blocks": {}
-        },
-        "content": {
-          "type": "_content-without-appearance",
-          "static": true,
-          "settings": {
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-end",
-            "gap": 24
-          },
-          "blocks": {
-            "text_4iefgW": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p>Step into the world of Neon Noir, where every accessory tells a story of innovation and bold style.</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h3",
-                "font": "var(--font-body--family)",
-                "font_size": "1.5rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_4iefgW"
-          ]
-        }
-      },
-      "name": "t:names.editorial_jumbo_text",
-      "settings": {
-        "media_position": "right",
-        "media_width": "medium",
-        "media_height": "60svh",
-        "section_width": "full-width",
-        "extend_media": true,
-        "color_scheme": "scheme-3",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "custom_liquid_xVzfYR": {
-      "type": "custom-liquid",
-      "name": "t:names.custom_liquid",
-      "settings": {
-        "custom_liquid": "<!DOCTYPE html>\n<html lang=\"lt\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>DRIVE // Cyberpunk Shop</title>\n    <!-- Three.js 3D grafikai -->\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js\"></script>\n    <!-- Google Fonts neoniniam stiliui -->\n    <link href=\"https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap\" rel=\"stylesheet\">\n\n    <style>\n        :root {\n            --neon-pink: #ff007f;\n            --neon-cyan: #00f3ff;\n            --neon-purple: #9400d3;\n            --dark-bg: #05050a;\n            --rgb-speed: 6s;\n        }\n\n        body, html {\n            margin: 0;\n            padding: 0;\n            width: 100%;\n            overflow-x: hidden;\n            background-color: var(--dark-bg);\n            font-family: 'Rajdhani', sans-serif;\n            color: #fff;\n        }\n\n        /* 3D Fonas */\n        #canvas-container {\n            position: fixed;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 100vh;\n            z-index: -1;\n        }\n\n        /* RGB Skenavimo Linija (Cyberpunk efektas) */\n        body::before {\n            content: \" \";\n            display: block;\n            position: fixed;\n            top: 0; left: 0; bottom: 0; right: 0;\n            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));\n            z-index: 99;\n            background-size: 100% 2px, 3px 100%;\n            pointer-events: none;\n        }\n\n        /* Headeris / Navigacija */\n        header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            padding: 20px 50px;\n            background: rgba(5, 5, 10, 0.8);\n            backdrop-filter: blur(10px);\n            border-bottom: 2px solid var(--neon-pink);\n            box-shadow: 0 0 20px var(--neon-pink);\n        }\n\n        .logo {\n            font-family: 'Orbitron', sans-serif;\n            font-size: 2rem;\n            font-weight: 900;\n            text-transform: uppercase;\n            letter-spacing: 5px;\n            color: #fff;\n            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);\n            animation: rgb-text var(--rgb-speed) infinite linear;\n        }\n\n        /* Hero Sekcija */\n        .hero {\n            height: 80vh;\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n            align-items: center;\n            text-align: center;\n            padding: 0 20px;\n        }\n\n        .hero h1 {\n            font-family: 'Orbitron', sans-serif;\n            font-size: 5rem;\n            text-transform: uppercase;\n            margin: 0;\n            letter-spacing: 10px;\n            color: #fff;\n            text-shadow: 0 0 20px var(--neon-pink);\n        }\n\n        .hero p {\n            font-size: 1.5rem;\n            text-transform: uppercase;\n            letter-spacing: 3px;\n            color: var(--neon-cyan);\n            margin: 20px 0;\n            text-shadow: 0 0 10px var(--neon-cyan);\n        }\n\n        /* RGB Mygtukas */\n        .neon-btn {\n            font-family: 'Orbitron', sans-serif;\n            font-size: 1.2rem;\n            padding: 15px 40px;\n            border: 2px solid var(--neon-cyan);\n            background: transparent;\n            color: #fff;\n            text-transform: uppercase;\n            cursor: pointer;\n            font-weight: bold;\n            letter-spacing: 2px;\n            position: relative;\n            transition: 0.3s;\n            overflow: hidden;\n            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);\n        }\n\n        .neon-btn:hover {\n            background: var(--neon-cyan);\n            color: var(--dark-bg);\n            box-shadow: 0 0 30px var(--neon-cyan), 0 0 50px var(--neon-cyan);\n            transform: scale(1.05);\n        }\n\n        /* Produktų Grid'as */\n        .products-section {\n            padding: 100px 50px;\n            background: rgba(5, 5, 10, 0.85);\n            backdrop-filter: blur(5px);\n        }\n\n        .section-title {\n            font-family: 'Orbitron', sans-serif;\n            font-size: 3rem;\n            text-align: center;\n            margin-bottom: 50px;\n            text-transform: uppercase;\n            color: #fff;\n            text-shadow: 0 0 15px var(--neon-purple);\n        }\n\n        .grid {\n            display: grid;\n            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n            gap: 40px;\n            max-width: 1200px;\n            margin: 0 auto;\n        }\n\n        /* Cyberpunk Produkto Kortelė */\n        .card {\n            background: rgba(20, 20, 35, 0.6);\n            border: 1px solid rgba(255, 0, 127, 0.3);\n            border-radius: 4px;\n            padding: 20px;\n            text-align: center;\n            position: relative;\n            transition: 0.4s ease;\n            backdrop-filter: blur(10px);\n        }\n\n        .card:hover {\n            border-color: var(--neon-pink);\n            box-shadow: 0 0 25px rgba(255, 0, 127, 0.6), inset 0 0 15px rgba(255, 0, 127, 0.2);\n            transform: translateY(-10px);\n        }\n\n        .card img {\n            width: 100%;\n            height: 250px;\n            object-fit: cover;\n            border-bottom: 2px solid var(--neon-cyan);\n            margin-bottom: 15px;\n        }\n\n        .card h3 {\n            font-family: 'Orbitron', sans-serif;\n            font-size: 1.6rem;\n            margin: 10px 0;\n            letter-spacing: 1px;\n        }\n\n        .price {\n            font-size: 1.4rem;\n            color: var(--neon-cyan);\n            font-weight: bold;\n            margin-bottom: 15px;\n            text-shadow: 0 0 5px var(--neon-cyan);\n        }\n\n        /* RGB Animacijos */\n        @keyframes rgb-text {\n            0% { text-shadow: 0 0 10px var(--neon-cyan); }\n            33% { text-shadow: 0 0 10px var(--neon-pink); }\n            66% { text-shadow: 0 0 10px var(--neon-purple); }\n            100% { text-shadow: 0 0 10px var(--neon-cyan); }\n        }\n\n        @media (max-width: 768px) {\n            .hero h1 { font-size: 3rem; }\n            header { padding: 20px; }\n        }\n    </style>\n</head>\n<body>\n\n    <!-- 3D Three.js Drobulė Fone -->\n    <div id=\"canvas-container\"></div>\n\n    <!-- Navigacija -->\n    <header>\n        <div class=\"logo\">DRIVE //</div>\n        <button class=\"neon-btn\" style=\"padding: 10px 20px; font-size: 0.9rem;\">Krepšelis (0)</button>\n    </header>\n\n    <!-- Hero Sekcija -->\n    <section class=\"hero\">\n        <h1>NIGHT DRIVE</h1>\n        <p>Cyberpunk stiliaus aksesuarai & apranga naktiniams klajūnams</p>\n        <button class=\"neon-btn\">Pirkti Kolekciją</button>\n    </section>\n\n    <!-- Produktų Sekcija -->\n    <section class=\"products-section\">\n        <h2 class=\"section-title\">Karštos Prekės</h2>\n        <div class=\"grid\">\n            \n            <!-- Produkto kortelė 1 -->\n            <div class=\"card\">\n                <img src=\"https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=500&q=80\" alt=\"Cyberpunk Akiniai\">\n                <h3>Neon HUD Akiniai</h3>\n                <div class=\"price\">49.99 €</div>\n                <button class=\"neon-btn\" style=\"width: 100%; font-size: 1rem;\">Į krepšelį</button>\n            </div>\n\n            <!-- Produkto kortelė 2 -->\n            <div class=\"card\">\n                <img src=\"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80\" alt=\"RGB Batai\">\n                <h3>RGB Drive Kedai</h3>\n                <div class=\"price\">129.99 €</div>\n                <button class=\"neon-btn\" style=\"width: 100%; font-size: 1rem;\">Į krepšelį</button>\n            </div>\n\n            <!-- Produkto kortelė 3 -->\n            <div class=\"card\">\n                <img src=\"https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&w=500&q=80\" alt=\"Klaviatūra\">\n                <h3>Cyber-Glow Striukė</h3>\n                <div class=\"price\">89.99 €</div>\n                <button class=\"neon-btn\" style=\"width: 100%; font-size: 1rem;\">Į krepšelį</button>\n            </div>\n\n        </div>\n    </section>\n\n    <!-- 3D Neoninio tinklo (Grid) generavimas fone -->\n    <script>\n        const container = document.getElementById('canvas-container');\n        const scene = new THREE.Scene();\n        \n        // Kamera\n        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);\n        camera.position.set(0, 20, 100);\n        camera.lookAt(0, 5, 0);\n\n        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });\n        renderer.setSize(window.innerWidth, window.innerHeight);\n        container.appendChild(renderer.domElement);\n\n        // Sukuriame Synthwave / Cyberpunk 3D tinklelį (Grid)\n        const size = 500;\n        const divisions = 50;\n        const gridHelper = new THREE.GridHelper(size, divisions, 0xff007f, 0x00f3ff);\n        gridHelper.position.y = -10;\n        scene.add(gridHelper);\n\n        // Apšvietimas fone (RGB dvelksmas)\n        const ambientLight = new THREE.AmbientLight(0x111111);\n        scene.add(ambientLight);\n\n        const directionalLight = new THREE.DirectionalLight(0x00f3ff, 1);\n        directionalLight.position.set(0, 1, 0);\n        scene.add(directionalLight);\n\n        // Animacija (Imituojame judėjimą / važiavimą keliu)\n        function animate() {\n            requestAnimationFrame(animate);\n\n            // Judina tinklelio linijas link kameros, sukuriant važiavimo efektą\n            gridHelper.position.z += 0.5;\n            if (gridHelper.position.z > (size / divisions)) {\n                gridHelper.position.z = 0;\n            }\n\n            renderer.render(scene, camera);\n        }\n\n        // Prisitaikymas prie ekrano dydžio keitimo\n        window.addEventListener('resize', onWindowResize, false);\n        function onWindowResize() {\n            camera.aspect = window.innerWidth / window.innerHeight;\n            camera.updateProjectionMatrix();\n            renderer.setSize(window.innerWidth, window.innerHeight);\n        }\n\n        animate();\n    </script>\n</body>\n</html>",
-        "color_scheme": "",
-        "section_width": "page-width",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "custom_liquid_3FDnFP": {
-      "type": "custom-liquid",
-      "name": "t:names.custom_liquid",
-      "settings": {
-        "custom_liquid": "<!DOCTYPE html>\n<html lang=\"lt\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>DRIVE // Cyberpunk Shop</title>\n    <!-- Three.js 3D grafikai -->\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js\"></script>\n    <!-- Google Fonts neoniniam stiliui -->\n    <link href=\"https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap\" rel=\"stylesheet\">\n\n    <style>\n        :root {\n            --neon-pink: #ff007f;\n            --neon-cyan: #00f3ff;\n            --neon-purple: #9400d3;\n            --dark-bg: #05050a;\n            --rgb-speed: 6s;\n        }\n\n        body, html {\n            margin: 0;\n            padding: 0;\n            width: 100%;\n            overflow-x: hidden;\n            background-color: var(--dark-bg);\n            font-family: 'Rajdhani', sans-serif;\n            color: #fff;\n        }\n\n        /* 3D Fonas */\n        #canvas-container {\n            position: fixed;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 100vh;\n            z-index: -1;\n        }\n\n        /* RGB Skenavimo Linija (Cyberpunk efektas) */\n        body::before {\n            content: \" \";\n            display: block;\n            position: fixed;\n            top: 0; left: 0; bottom: 0; right: 0;\n            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));\n            z-index: 99;\n            background-size: 100% 2px, 3px 100%;\n            pointer-events: none;\n        }\n\n        /* Headeris / Navigacija */\n        header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            padding: 20px 50px;\n            background: rgba(5, 5, 10, 0.8);\n            backdrop-filter: blur(10px);\n            border-bottom: 2px solid var(--neon-pink);\n            box-shadow: 0 0 20px var(--neon-pink);\n        }\n\n        .logo {\n            font-family: 'Orbitron', sans-serif;\n            font-size: 2rem;\n            font-weight: 900;\n            text-transform: uppercase;\n            letter-spacing: 5px;\n            color: #fff;\n            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);\n            animation: rgb-text var(--rgb-speed) infinite linear;\n        }\n\n        /* Hero Sekcija */\n        .hero {\n            height: 80vh;\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n            align-items: center;\n            text-align: center;\n            padding: 0 20px;\n        }\n\n        .hero h1 {\n            font-family: 'Orbitron', sans-serif;\n            font-size: 5rem;\n            text-transform: uppercase;\n            margin: 0;\n            letter-spacing: 10px;\n            color: #fff;\n            text-shadow: 0 0 20px var(--neon-pink);\n        }\n\n        .hero p {\n            font-size: 1.5rem;\n            text-transform: uppercase;\n            letter-spacing: 3px;\n            color: var(--neon-cyan);\n            margin: 20px 0;\n            text-shadow: 0 0 10px var(--neon-cyan);\n        }\n\n        /* RGB Mygtukas */\n        .neon-btn {\n            font-family: 'Orbitron', sans-serif;\n            font-size: 1.2rem;\n            padding: 15px 40px;\n            border: 2px solid var(--neon-cyan);\n            background: transparent;\n            color: #fff;\n            text-transform: uppercase;\n            cursor: pointer;\n            font-weight: bold;\n            letter-spacing: 2px;\n            position: relative;\n            transition: 0.3s;\n            overflow: hidden;\n            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);\n        }\n\n        .neon-btn:hover {\n            background: var(--neon-cyan);\n            color: var(--dark-bg);\n            box-shadow: 0 0 30px var(--neon-cyan), 0 0 50px var(--neon-cyan);\n            transform: scale(1.05);\n        }\n\n        /* Produktų Grid'as */\n        .products-section {\n            padding: 100px 50px;\n            background: rgba(5, 5, 10, 0.85);\n            backdrop-filter: blur(5px);\n        }\n\n        .section-title {\n            font-family: 'Orbitron', sans-serif;\n            font-size: 3rem;\n            text-align: center;\n            margin-bottom: 50px;\n            text-transform: uppercase;\n            color: #fff;\n            text-shadow: 0 0 15px var(--neon-purple);\n        }\n\n        .grid {\n            display: grid;\n            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n            gap: 40px;\n            max-width: 1200px;\n            margin: 0 auto;\n        }\n\n        /* Cyberpunk Produkto Kortelė */\n        .card {\n            background: rgba(20, 20, 35, 0.6);\n            border: 1px solid rgba(255, 0, 127, 0.3);\n            border-radius: 4px;\n            padding: 20px;\n            text-align: center;\n            position: relative;\n            transition: 0.4s ease;\n            backdrop-filter: blur(10px);\n        }\n\n        .card:hover {\n            border-color: var(--neon-pink);\n            box-shadow: 0 0 25px rgba(255, 0, 127, 0.6), inset 0 0 15px rgba(255, 0, 127, 0.2);\n            transform: translateY(-10px);\n        }\n\n        .card img {\n            width: 100%;\n            height: 250px;\n            object-fit: cover;\n            border-bottom: 2px solid var(--neon-cyan);\n            margin-bottom: 15px;\n        }\n\n        .card h3 {\n            font-family: 'Orbitron', sans-serif;\n            font-size: 1.6rem;\n            margin: 10px 0;\n            letter-spacing: 1px;\n        }\n\n        .price {\n            font-size: 1.4rem;\n            color: var(--neon-cyan);\n            font-weight: bold;\n            margin-bottom: 15px;\n            text-shadow: 0 0 5px var(--neon-cyan);\n        }\n\n        /* RGB Animacijos */\n        @keyframes rgb-text {\n            0% { text-shadow: 0 0 10px var(--neon-cyan); }\n            33% { text-shadow: 0 0 10px var(--neon-pink); }\n            66% { text-shadow: 0 0 10px var(--neon-purple); }\n            100% { text-shadow: 0 0 10px var(--neon-cyan); }\n        }\n\n        @media (max-width: 768px) {\n            .hero h1 { font-size: 3rem; }\n            header { padding: 20px; }\n        }\n    </style>\n</head>\n<body>\n\n    <!-- 3D Three.js Drobulė Fone -->\n    <div id=\"canvas-container\"></div>\n\n    <!-- Navigacija -->\n    <header>\n        <div class=\"logo\">DRIVE //</div>\n        <button class=\"neon-btn\" style=\"padding: 10px 20px; font-size: 0.9rem;\">Krepšelis (0)</button>\n    </header>\n\n    <!-- Hero Sekcija -->\n    <section class=\"hero\">\n        <h1>NIGHT DRIVE</h1>\n        <p>Cyberpunk stiliaus aksesuarai & apranga naktiniams klajūnams</p>\n        <button class=\"neon-btn\">Pirkti Kolekciją</button>\n    </section>\n\n    <!-- Produktų Sekcija -->\n    <section class=\"products-section\">\n        <h2 class=\"section-title\">Karštos Prekės</h2>\n        <div class=\"grid\">\n            \n            <!-- Produkto kortelė 1 -->\n            <div class=\"card\">\n                <img src=\"https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=500&q=80\" alt=\"Cyberpunk Akiniai\">\n                <h3>Neon HUD Akiniai</h3>\n                <div class=\"price\">49.99 €</div>\n                <button class=\"neon-btn\" style=\"width: 100%; font-size: 1rem;\">Į krepšelį</button>\n            </div>\n\n            <!-- Produkto kortelė 2 -->\n            <div class=\"card\">\n                <img src=\"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80\" alt=\"RGB Batai\">\n                <h3>RGB Drive Kedai</h3>\n                <div class=\"price\">129.99 €</div>\n                <button class=\"neon-btn\" style=\"width: 100%; font-size: 1rem;\">Į krepšelį</button>\n            </div>\n\n            <!-- Produkto kortelė 3 -->\n            <div class=\"card\">\n                <img src=\"https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&w=500&q=80\" alt=\"Klaviatūra\">\n                <h3>Cyber-Glow Striukė</h3>\n                <div class=\"price\">89.99 €</div>\n                <button class=\"neon-btn\" style=\"width: 100%; font-size: 1rem;\">Į krepšelį</button>\n            </div>\n\n        </div>\n    </section>\n\n    <!-- 3D Neoninio tinklo (Grid) generavimas fone -->\n    <script>\n        const container = document.getElementById('canvas-container');\n        const scene = new THREE.Scene();\n        \n        // Kamera\n        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);\n        camera.position.set(0, 20, 100);\n        camera.lookAt(0, 5, 0);\n\n        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });\n        renderer.setSize(window.innerWidth, window.innerHeight);\n        container.appendChild(renderer.domElement);\n\n        // Sukuriame Synthwave / Cyberpunk 3D tinklelį (Grid)\n        const size = 500;\n        const divisions = 50;\n        const gridHelper = new THREE.GridHelper(size, divisions, 0xff007f, 0x00f3ff);\n        gridHelper.position.y = -10;\n        scene.add(gridHelper);\n\n        // Apšvietimas fone (RGB dvelksmas)\n        const ambientLight = new THREE.AmbientLight(0x111111);\n        scene.add(ambientLight);\n\n        const directionalLight = new THREE.DirectionalLight(0x00f3ff, 1);\n        directionalLight.position.set(0, 1, 0);\n        scene.add(directionalLight);\n\n        // Animacija (Imituojame judėjimą / važiavimą keliu)\n        function animate() {\n            requestAnimationFrame(animate);\n\n            // Judina tinklelio linijas link kameros, sukuriant važiavimo efektą\n            gridHelper.position.z += 0.5;\n            if (gridHelper.position.z > (size / divisions)) {\n                gridHelper.position.z = 0;\n            }\n\n            renderer.render(scene, camera);\n        }\n\n        // Prisitaikymas prie ekrano dydžio keitimo\n        window.addEventListener('resize', onWindowResize, false);\n        function onWindowResize() {\n            camera.aspect = window.innerWidth / window.innerHeight;\n            camera.updateProjectionMatrix();\n            renderer.setSize(window.innerWidth, window.innerHeight);\n        }\n\n        animate();\n    </script>\n</body>\n</html>",
-        "color_scheme": "",
-        "section_width": "page-width",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "custom_liquid_Ww7hqC": {
-      "type": "custom-liquid",
-      "name": "t:names.custom_liquid",
-      "settings": {
-        "custom_liquid": "{\n  \"theme_settings\": {\n    \"store_name\": \"LEDONAS\",\n    \"style\": \"Dark 3D Cyberpunk Kinetic Art Gallery\",\n    \"layout\": \"Grid with Depth\",\n    \"theme_color_scheme\": {\n      \"background\": \"#000000\",\n      \"text\": \"#E0E0E0\",\n      \"accent_1\": \"#00FFFF\",\n      \"accent_2\": \"#FF00FF\",\n      \"container_cards\": \"#121212\",\n      \"container_shadows\": \"rgba(0, 0, 0, 0.8)\",\n      \"button_background\": \"#FF00FF\",\n      \"button_text\": \"#000000\"\n    },\n    \"typography\": {\n      \"heading_font\": \"Space Grotesk\",\n      \"text_font\": \"Inter\",\n      \"text_transform\": \"uppercase\"\n    },\n    \"animations\": {\n      \"product_hover\": \"3D Perspective Tilt with Neon Glow\",\n      \"transitions\": \"High-Tech Smooth Fade-In\",\n      \"parallax_scrolling\": \"Enable for product grids\"\n    },\n    \"sections\": {\n      \"hero\": {\n        \"layout\": \"Full width 3D split\",\n        \"title\": \"ART IN MOTION. BEYOND STATIC.\",\n        \"subtitle\": \"KINETINIS RGB MENAS IR OPTINĖS ILIUZIJOS INTERJERUI.\",\n        \"main_image\": \"A high-end floating product frame showcasing a shifting-color optical illusion artwork against a deep black wall.\"\n      },\n      \"product_grid\": {\n        \"columns\": 3,\n        \"product_card_style\": \"Floating with 3D shadow\",\n        \"show_price\": true,\n        \"show_badges\": true\n      },\n      \"commercial_banner\": {\n        \"title\": \"INDIVIDUALŪS UŽSAKYMAI VERSLUI.\",\n        \"description\": \"KURKITE UNIKALIAS ŠVIESOS INSTALIACIJAS SAVO ERDVEI.\"\n      }\n    }\n  }\n}",
-        "color_scheme": "",
-        "section_width": "page-width",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
     }
   },
   "order": [
     "hero_hRhTz6",
-    "section_JpEEkW",
-    "product_list_themegen",
-    "section_x8mrnx",
-    "media_with_content_7nKFKW",
-    "custom_liquid_xVzfYR",
-    "custom_liquid_3FDnFP",
-    "custom_liquid_Ww7hqC"
+    "section_JpEEkW"
   ]
 }
