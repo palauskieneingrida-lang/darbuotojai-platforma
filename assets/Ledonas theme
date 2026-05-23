@@ -1,206 +1,432 @@
 /* ============================================================
-   LEDONAS — Cyberpunk 3D Interaktyvumas
-   Failas: assets/ledonas-theme.js
+   LEDONAS THEME — BASE DESIGN SYSTEM
+   Cyberpunk / RGB Neon aesthetic
    ============================================================ */
 
-(function () {
-  'use strict';
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap');
 
-  /* ── 1. CUSTOM CURSOR ─────────────────────────────────────── */
-  function initCursor() {
-    const dot  = document.createElement('div');
-    const ring = document.createElement('div');
-    dot.id  = 'ledonas-cursor';
-    ring.id = 'ledonas-cursor-ring';
-    document.body.appendChild(dot);
-    document.body.appendChild(ring);
+/* ── CSS Custom Properties ── */
+:root {
+  /* Colors */
+  --color-bg:           #0b0b0b;
+  --color-bg-mid:       #111118;
+  --color-bg-card:      #13131f;
+  --color-neon-cyan:    #00f3ff;
+  --color-neon-magenta: #ff00e6;
+  --color-accent:       #6a00ff;
+  --color-text:         #f0f0f0;
+  --color-heading:      #ffffff;
+  --color-muted:        #888899;
+  --color-border:       rgba(0, 243, 255, 0.3);
+  --color-border-mag:   rgba(255, 0, 230, 0.3);
 
-    let mx = 0, my = 0, rx = 0, ry = 0;
+  /* Typography */
+  --font-display:  'Orbitron', monospace;
+  --font-mono:     'Share Tech Mono', monospace;
+  --font-body:     'Rajdhani', sans-serif;
 
-    document.addEventListener('mousemove', (e) => {
-      mx = e.clientX;
-      my = e.clientY;
-      dot.style.left = mx + 'px';
-      dot.style.top  = my + 'px';
-    });
+  /* Spacing */
+  --gap-xs:  0.5rem;
+  --gap-sm:  1rem;
+  --gap-md:  2rem;
+  --gap-lg:  4rem;
+  --gap-xl:  8rem;
 
-    // Žiedas seka su vėlavimu
-    function animateRing() {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
-      requestAnimationFrame(animateRing);
-    }
-    animateRing();
-  }
+  /* Borders */
+  --border-neon:  1px solid var(--color-border);
+  --border-mag:   1px solid var(--color-border-mag);
+  --radius:       4px;
 
-  /* ── 2. 3D TILT EFEKTAS PREKIŲ KORTELĖMS ─────────────────── */
-  function initTiltCards() {
-    const SELECTORS = [
-      '.card-wrapper',
-      '.product-card-wrapper',
-      '[class*="card--product"]',
-      '.grid__item',
-    ].join(', ');
+  /* Glows */
+  --glow-cyan:    0 0 10px var(--color-neon-cyan),
+                  0 0 30px rgba(0, 243, 255, 0.4),
+                  0 0 60px rgba(0, 243, 255, 0.15);
+  --glow-magenta: 0 0 10px var(--color-neon-magenta),
+                  0 0 30px rgba(255, 0, 230, 0.4),
+                  0 0 60px rgba(255, 0, 230, 0.15);
+  --glow-accent:  0 0 10px var(--color-accent),
+                  0 0 30px rgba(106, 0, 255, 0.4);
 
-    const cards = document.querySelectorAll(SELECTORS);
-    const MAX_TILT   = 12;   // laipsniai
-    const MAX_SHIFT  = 6;    // pikseliai (paralax)
-    const RESET_MS   = 400;
+  /* Transitions */
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    cards.forEach((wrapper) => {
-      const inner = wrapper.querySelector('.card, .product-card, [class*="card__inner"]') || wrapper;
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-      wrapper.addEventListener('mousemove', (e) => {
-        const rect   = wrapper.getBoundingClientRect();
-        const x      = (e.clientX - rect.left) / rect.width  - 0.5; // -0.5 … 0.5
-        const y      = (e.clientY - rect.top)  / rect.height - 0.5;
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
 
-        const rotY   =  x * MAX_TILT;
-        const rotX   = -y * MAX_TILT;
-        const shiftX =  x * MAX_SHIFT;
-        const shiftY =  y * MAX_SHIFT;
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
 
-        inner.style.transition = 'transform 0.1s ease';
-        inner.style.transform  =
-          `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translate(${shiftX}px, ${shiftY}px) scale(1.02)`;
+/* Scanline overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
 
-        // Dinamiškas švytėjimas pagal pelės poziciją
-        const hue = Math.round((x + 0.5) * 360);
-        inner.style.boxShadow = `0 0 15px hsl(${hue}, 100%, 60%), 0 0 40px hsl(${hue}, 100%, 60%, 0.3)`;
-      });
+/* ── Typography ── */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  color: var(--color-heading);
+  line-height: 1.15;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
 
-      wrapper.addEventListener('mouseleave', () => {
-        inner.style.transition = `transform ${RESET_MS}ms ease, box-shadow ${RESET_MS}ms ease`;
-        inner.style.transform  = 'perspective(800px) rotateX(0) rotateY(0) translate(0,0) scale(1)';
-        inner.style.boxShadow  = '';
-      });
-    });
-  }
+h1 { font-size: clamp(2rem, 6vw, 4.5rem); font-weight: 900; }
+h2 { font-size: clamp(1.5rem, 4vw, 3rem);  font-weight: 700; }
+h3 { font-size: clamp(1.1rem, 2.5vw, 1.8rem); font-weight: 600; }
 
-  /* ── 3. MARQUEE — AUTOMATINIS DUPLIKAVIMAS ────────────────── */
-  function initMarquee() {
-    const tracks = document.querySelectorAll('.ledonas-marquee__track');
-    tracks.forEach((track) => {
-      // Dubliuojame turinį, kad judėjimas būtų begalinis
-      const clone = track.innerHTML;
-      track.innerHTML = clone + clone;
-    });
-  }
+p, li { font-family: var(--font-body); font-size: 1.05rem; font-weight: 400; }
 
-  /* ── 4. NEON GLOW HOVER ANT MYGTUKŲ ──────────────────────── */
-  function initButtonGlow() {
-    const BTN_SEL = '.button, .btn, button[type="submit"], .product-form__submit';
-    document.querySelectorAll(BTN_SEL).forEach((btn) => {
-      btn.addEventListener('mouseenter', () => {
-        btn.style.boxShadow = '0 0 8px #00f0ff, 0 0 20px #00f0ffaa, 0 0 40px #00f0ff44';
-      });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.boxShadow = '';
-      });
-    });
-  }
+a {
+  color: var(--color-neon-cyan);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover { color: var(--color-neon-magenta); }
 
-  /* ── 5. SCROLL PARALLAX FONO TINKLELIUI ──────────────────── */
-  function initScrollParallax() {
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const y = window.scrollY * 0.3;
-          document.body.style.backgroundPosition = `0px ${y}px, 0px ${y}px`;
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-  }
+/* ── Layout Utilities ── */
+.container {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--gap-md);
+}
 
-  /* ── 6. HEADER SCROLL EFEKTAS ────────────────────────────── */
-  function initHeaderScroll() {
-    const header = document.querySelector(
-      '.shopify-section-header, header, .header-wrapper, .section-header'
-    );
-    if (!header) return;
+.section-pad {
+  padding-block: var(--gap-xl);
+}
 
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.style.boxShadow = '0 0 40px rgba(0, 240, 255, 0.25), 0 4px 30px rgba(0,0,0,0.8)';
-      } else {
-        header.style.boxShadow = '0 0 30px rgba(0, 240, 255, 0.15)';
-      }
-    });
-  }
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+}
+@media (max-width: 900px) {
+  .grid-3 { grid-template-columns: 1fr; }
+}
 
-  /* ── 7. PRODUKTO PUSLAPIO NUOTRAUKOS GLOW ────────────────── */
-  function initProductImageGlow() {
-    const images = document.querySelectorAll(
-      '.product__media img, .product-single__photo img, [class*="product-media"] img'
-    );
-    images.forEach((img) => {
-      img.addEventListener('mouseenter', () => {
-        img.style.filter    = 'brightness(1.1) saturate(1.4)';
-        img.style.boxShadow = '0 0 30px rgba(0, 240, 255, 0.3)';
-      });
-      img.addEventListener('mouseleave', () => {
-        img.style.filter    = '';
-        img.style.boxShadow = '';
-      });
-    });
-  }
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-neon-cyan);
+  background: transparent;
+  border: var(--border-neon);
+  cursor: crosshair;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
 
-  /* ── 8. SCAN LINE EFEKTAS (subtilus) ─────────────────────── */
-  function initScanlines() {
-    const scanline = document.createElement('div');
-    scanline.id = 'ledonas-scanline';
-    Object.assign(scanline.style, {
-      position:     'fixed',
-      top:          '0',
-      left:         '0',
-      width:        '100%',
-      height:       '2px',
-      background:   'rgba(0, 240, 255, 0.06)',
-      pointerEvents:'none',
-      zIndex:       '9997',
-      animation:    'scanline-move 8s linear infinite',
-    });
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(0, 243, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(255, 0, 230, 0.05) 100%);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
 
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes scanline-move {
-        0%   { top: -2px; opacity: 0; }
-        5%   { opacity: 1; }
-        95%  { opacity: 1; }
-        100% { top: 100vh; opacity: 0; }
-      }
-    `;
-    document.head.appendChild(style);
-    document.body.appendChild(scanline);
-  }
+.btn:hover {
+  color: var(--color-heading);
+  border-color: var(--color-neon-cyan);
+  box-shadow: var(--glow-cyan);
+  text-shadow: 2px 0 var(--color-neon-cyan), -2px 0 var(--color-neon-magenta);
+  animation: glitch-btn 0.3s steps(2) forwards;
+}
 
-  /* ── INICIALIZACIJA ───────────────────────────────────────── */
-  function init() {
-    initCursor();
-    initTiltCards();
-    initMarquee();
-    initButtonGlow();
-    initScrollParallax();
-    initHeaderScroll();
-    initProductImageGlow();
-    initScanlines();
+.btn:hover::before { opacity: 1; }
 
-    // Pakartoti kortelių tilt po Shopify sekcijų perkrovimo
-    document.addEventListener('shopify:section:load', () => {
-      initTiltCards();
-      initButtonGlow();
-      initProductImageGlow();
-    });
-  }
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-neon-cyan));
+  color: var(--color-bg);
+  border-color: transparent;
+  font-weight: 900;
+}
+.btn-primary:hover {
+  color: var(--color-bg);
+  box-shadow: var(--glow-cyan), var(--glow-accent);
+}
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
+/* ── Neon Badge ── */
+.neon-badge {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.neon-badge--cyan {
+  color: var(--color-neon-cyan);
+  background: rgba(0, 243, 255, 0.1);
+  border: 1px solid rgba(0, 243, 255, 0.5);
+  box-shadow: inset 0 0 8px rgba(0, 243, 255, 0.1), 0 0 8px rgba(0, 243, 255, 0.2);
+}
+.neon-badge--magenta {
+  color: var(--color-neon-magenta);
+  background: rgba(255, 0, 230, 0.1);
+  border: 1px solid rgba(255, 0, 230, 0.5);
+  box-shadow: inset 0 0 8px rgba(255, 0, 230, 0.1), 0 0 8px rgba(255, 0, 230, 0.2);
+}
+.neon-badge--accent {
+  color: #b066ff;
+  background: rgba(106, 0, 255, 0.15);
+  border: 1px solid rgba(106, 0, 255, 0.5);
+  box-shadow: inset 0 0 8px rgba(106, 0, 255, 0.1), 0 0 8px rgba(106, 0, 255, 0.2);
+}
+
+/* Price badge on cards */
+.price-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius);
+  z-index: 2;
+}
+
+/* ── Cards ── */
+.card {
+  background: var(--color-bg-card);
+  border: var(--border-neon);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(0, 243, 255, 0.2), 0 0 60px rgba(106, 0, 255, 0.1);
+}
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(0,243,255,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ── Section headings ── */
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--color-neon-cyan);
+  text-transform: uppercase;
+  margin-bottom: var(--gap-xs);
+  opacity: 0.85;
+}
+
+.section-title {
+  margin-bottom: var(--gap-md);
+}
+
+.section-title .accent { color: var(--color-neon-cyan); }
+
+/* Neon underline */
+.neon-line {
+  display: block;
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-neon-cyan), var(--color-neon-magenta));
+  margin-bottom: var(--gap-md);
+  box-shadow: 0 0 12px var(--color-neon-cyan);
+}
+
+/* ── Divider ── */
+.cyber-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-neon-cyan), var(--color-neon-magenta), transparent);
+  opacity: 0.4;
+  margin-block: var(--gap-md);
+}
+
+/* ── Modal ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.is-open { display: flex; }
+
+.modal-box {
+  background: var(--color-bg-card);
+  border: var(--border-neon);
+  border-radius: var(--radius);
+  padding: var(--gap-md);
+  max-width: 860px;
+  width: 94%;
+  position: relative;
+  box-shadow: var(--glow-cyan);
+}
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: var(--border-neon);
+  color: var(--color-neon-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.25rem 0.6rem;
+  cursor: crosshair;
+}
+.modal-close:hover { color: var(--color-neon-magenta); border-color: var(--color-neon-magenta); }
+
+.modal-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: block;
+  background: #000;
+}
+
+/* ── Animations ── */
+@keyframes glitch-btn {
+  0%   { transform: translate(0); }
+  20%  { transform: translate(-2px, 1px); clip-path: inset(20% 0 60% 0); }
+  40%  { transform: translate(2px, -1px); clip-path: inset(70% 0 10% 0); }
+  60%  { transform: translate(0, 2px); clip-path: inset(40% 0 40% 0); }
+  80%  { transform: translate(1px, -1px); }
+  100% { transform: translate(0); clip-path: none; }
+}
+
+@keyframes flicker {
+  0%, 95%, 100%  { opacity: 1; }
+  96%            { opacity: 0.7; }
+  97%            { opacity: 1; }
+  98%            { opacity: 0.5; }
+  99%            { opacity: 0.9; }
+}
+
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px var(--color-neon-cyan); }
+  50%       { box-shadow: var(--glow-cyan); }
+}
+
+@keyframes glitch-text {
+  0%   { text-shadow: 2px 0 var(--color-neon-cyan), -2px 0 var(--color-neon-magenta); clip-path: none; }
+  5%   { text-shadow: -2px 0 var(--color-neon-cyan), 2px 0 var(--color-neon-magenta); clip-path: inset(10% 0 80% 0); transform: translate(-1px, 0); }
+  10%  { text-shadow: 2px 0 var(--color-neon-magenta), -2px 0 var(--color-neon-cyan); clip-path: inset(60% 0 20% 0); transform: translate(1px, 0); }
+  15%  { clip-path: none; transform: none; text-shadow: none; }
+  100% { text-shadow: none; clip-path: none; transform: none; }
+}
+
+@keyframes type-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes neon-flicker-in {
+  0%   { opacity: 0; text-shadow: none; }
+  30%  { opacity: 0.3; }
+  50%  { opacity: 0; }
+  70%  { opacity: 0.8; text-shadow: var(--glow-cyan); }
+  85%  { opacity: 0.6; }
+  100% { opacity: 1; text-shadow: var(--glow-cyan); }
+}
+
+/* ── Glitch text utility ── */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+.glitch::before {
+  color: var(--color-neon-cyan);
+  animation: glitch-before 3s infinite;
+  clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+  transform: translate(-2px, 0);
+}
+.glitch::after {
+  color: var(--color-neon-magenta);
+  animation: glitch-after 3s infinite;
+  clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+  transform: translate(2px, 0);
+}
+
+@keyframes glitch-before {
+  0%,90%,100% { transform: translate(0); opacity: 0; }
+  92%          { transform: translate(-3px, 1px); opacity: 0.8; }
+  94%          { transform: translate(2px, -1px); opacity: 0.6; }
+  96%          { transform: translate(-1px, 2px); opacity: 0.7; }
+}
+@keyframes glitch-after {
+  0%,88%,100% { transform: translate(0); opacity: 0; }
+  90%          { transform: translate(3px, -1px); opacity: 0.8; }
+  92%          { transform: translate(-2px, 1px); opacity: 0.5; }
+  94%          { transform: translate(1px, -2px); opacity: 0.7; }
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-neon-cyan), var(--color-accent));
+  border-radius: 3px;
+}
+
+/* ── Selection ── */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-heading);
+}
