@@ -12,6 +12,32 @@
     "hero_yG434h": {
       "type": "hero",
       "blocks": {
+        "text_YG4MHT": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h1>Išskirtiniai optinio meno kūriniai jūsų erdvei</h1>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h1",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "button_miL4Em": {
           "type": "button",
           "name": "t:names.button",
@@ -29,6 +55,7 @@
         }
       },
       "block_order": [
+        "text_YG4MHT",
         "button_miL4Em"
       ],
       "name": "t:names.hero",
@@ -426,12 +453,104 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "1779197013f1bc57f0": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_8a0f9fa_Cfigei": {
+          "type": "ai_gen_block_8a0f9fa",
+          "settings": {
+            "heading": "Art in Real Spaces",
+            "subheading": "See how our neon artworks transform living spaces",
+            "text_alignment": "center",
+            "heading_size": 48,
+            "subheading_size": 18,
+            "heading_transform": "uppercase",
+            "columns_desktop": 3,
+            "columns_mobile": "1",
+            "grid_gap": 16,
+            "grid_top_margin": 40,
+            "span_1": "normal",
+            "caption_1": "",
+            "link_1": "",
+            "link_text_1": "Shop now",
+            "span_2": "span-2",
+            "caption_2": "",
+            "link_2": "",
+            "link_text_2": "Shop now",
+            "span_3": "normal",
+            "caption_3": "",
+            "link_3": "",
+            "link_text_3": "Shop now",
+            "span_4": "span-row-2",
+            "caption_4": "",
+            "link_4": "",
+            "link_text_4": "Shop now",
+            "span_5": "normal",
+            "caption_5": "",
+            "link_5": "",
+            "link_text_5": "Shop now",
+            "span_6": "normal",
+            "caption_6": "",
+            "link_6": "",
+            "link_text_6": "Shop now",
+            "show_glow": true,
+            "glow_opacity": 40,
+            "glow_color": "#ff00ff",
+            "image_border_radius": 8,
+            "background_color": "#000000",
+            "item_background": "#1a1a1a",
+            "heading_color": "#ffffff",
+            "subheading_color": "#e7e4e4",
+            "caption_color": "#ffffff",
+            "link_color": "#ff00ff",
+            "link_hover_color": "#00ffff",
+            "caption_size": 16,
+            "link_size": 14,
+            "section_padding": 60,
+            "header_spacing": 40,
+            "subheading_spacing": 12
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_8a0f9fa_Cfigei"
+      ],
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
     "hero_yG434h",
     "hero_hRhTz6",
     "section_JpEEkW",
-    "collection_list_B8V9rC"
+    "collection_list_B8V9rC",
+    "1779197013f1bc57f0"
   ]
 }
