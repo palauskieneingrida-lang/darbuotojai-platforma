@@ -1,6 +1,689 @@
+{% doc %}
+  @prompt
+    Create a "Split Hero" section with two equal columns (50/50 layout) for a dark cyberpunk neon art store. Structure:
+    
+    TOP: Full-width heading "Pasirinkite savo kryptį" and subheading "Rinkkitės iš paruoštų unikalų dizainų arba tapkite kūrėju patys." centered above the two columns.
+    
+    LEFT COLUMN (Collection):
+    - Background image (customizable via theme editor)
+    - Overlay text: "Mūsų geriausi darbai, paruošti jūsų namų sienoms."
+    - Solid filled CTA button: "EITI Į KOLEKCIJĄ" (white or cyan fill, dark text)
+    - Link field for the button
+    
+    RIGHT COLUMN (Custom Order):
+    - Background image (customizable via theme editor)
+    - Overlay text: "Turite savo viziją? Sukurkite unikalų paveikslą pagal individualų užsakymą."
+    - Outline/ghost style CTA button: "SUSIKURK SAVO" (contrasting style — border only, no fill)
+    - Link field for the button
+    
+    Design requirements:
+    - Dark background (#000 or very dark)
+    - Subtle dark gradient overlay on images so text is readable
+    - Neon cyan/blue accent color consistent with cyberpunk aesthetic
+    - Hover effect on columns: slight brightness increase or neon glow border
+    - Both columns equal height, responsive (stacks vertically on mobile)
+    - All text, images, and button labels editable in the theme editor
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-split-hero-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding }}px 0;
+  }
+
+  .ai-split-hero-container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-split-hero-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-split-hero-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 {{ block.settings.subheading_spacing }}px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-split-hero-subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size }}px;
+    color: {{ block.settings.subheading_color }};
+    margin: 0;
+    opacity: 0.9;
+  }
+
+  .ai-split-hero-columns-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ block.settings.column_gap }}px;
+  }
+
+  .ai-split-hero-column-{{ ai_gen_id }} {
+    position: relative;
+    min-height: {{ block.settings.column_height }}px;
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ai-split-hero-column-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 {{ block.settings.glow_intensity }}px {{ block.settings.glow_color }};
+  }
+
+  .ai-split-hero-bg-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-split-hero-bg-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+  }
+
+  .ai-split-hero-bg-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+  }
+
+  .ai-split-hero-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, {{ block.settings.overlay_opacity_top }}) 0%,
+      rgba(0, 0, 0, {{ block.settings.overlay_opacity_bottom }}) 100%
+    );
+  }
+
+  .ai-split-hero-content-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    height: 100%;
+    padding: {{ block.settings.content_padding }}px;
+  }
+
+  .ai-split-hero-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.overlay_text_size }}px;
+    color: {{ block.settings.overlay_text_color }};
+    margin: 0 0 {{ block.settings.text_button_spacing }}px;
+    line-height: 1.4;
+    max-width: 90%;
+  }
+
+  .ai-split-hero-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-split-hero-button-filled-{{ ai_gen_id }} {
+    background-color: {{ block.settings.filled_button_bg }};
+    color: {{ block.settings.filled_button_text }};
+    border: 2px solid {{ block.settings.filled_button_bg }};
+  }
+
+  .ai-split-hero-button-filled-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.filled_button_hover_bg }};
+    color: {{ block.settings.filled_button_hover_text }};
+    border-color: {{ block.settings.filled_button_hover_bg }};
+    box-shadow: 0 0 15px {{ block.settings.filled_button_hover_bg }};
+  }
+
+  .ai-split-hero-button-outline-{{ ai_gen_id }} {
+    background-color: transparent;
+    color: {{ block.settings.outline_button_text }};
+    border: 2px solid {{ block.settings.outline_button_border }};
+  }
+
+  .ai-split-hero-button-outline-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.outline_button_hover_bg }};
+    color: {{ block.settings.outline_button_hover_text }};
+    border-color: {{ block.settings.outline_button_hover_border }};
+    box-shadow: 0 0 15px {{ block.settings.outline_button_hover_border }};
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-split-hero-columns-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.mobile_column_gap }}px;
+    }
+
+    .ai-split-hero-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.6 }}px;
+    }
+
+    .ai-split-hero-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size | times: 0.8 }}px;
+    }
+
+    .ai-split-hero-column-{{ ai_gen_id }} {
+      min-height: {{ block.settings.mobile_column_height }}px;
+    }
+
+    .ai-split-hero-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.overlay_text_size | times: 0.9 }}px;
+    }
+
+    .ai-split-hero-button-{{ ai_gen_id }} {
+      font-size: {{ block.settings.button_text_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<split-hero-{{ ai_gen_id }} class="ai-split-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-split-hero-container-{{ ai_gen_id }}">
+    <div class="ai-split-hero-header-{{ ai_gen_id }}">
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-split-hero-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+      {% endif %}
+      {% if block.settings.subheading != blank %}
+        <p class="ai-split-hero-subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    <div class="ai-split-hero-columns-{{ ai_gen_id }}">
+      <div class="ai-split-hero-column-{{ ai_gen_id }}">
+        {% if block.settings.left_image %}
+          <img
+            src="{{ block.settings.left_image | image_url: width: 1000 }}"
+            alt="{{ block.settings.left_image.alt | escape }}"
+            class="ai-split-hero-bg-{{ ai_gen_id }}"
+            loading="lazy"
+            width="{{ block.settings.left_image.width }}"
+            height="{{ block.settings.left_image.height }}"
+          >
+        {% else %}
+          <div class="ai-split-hero-bg-placeholder-{{ ai_gen_id }}">
+            {{ 'hero-apparel-1' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+        <div class="ai-split-hero-overlay-{{ ai_gen_id }}"></div>
+        <div class="ai-split-hero-content-{{ ai_gen_id }}">
+          {% if block.settings.left_text != blank %}
+            <p class="ai-split-hero-text-{{ ai_gen_id }}">{{ block.settings.left_text }}</p>
+          {% endif %}
+          {% if block.settings.left_button_text != blank %}
+            <a
+              href="{{ block.settings.left_button_link }}"
+              class="ai-split-hero-button-{{ ai_gen_id }} ai-split-hero-button-filled-{{ ai_gen_id }}"
+            >
+              {{ block.settings.left_button_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="ai-split-hero-column-{{ ai_gen_id }}">
+        {% if block.settings.right_image %}
+          <img
+            src="{{ block.settings.right_image | image_url: width: 1000 }}"
+            alt="{{ block.settings.right_image.alt | escape }}"
+            class="ai-split-hero-bg-{{ ai_gen_id }}"
+            loading="lazy"
+            width="{{ block.settings.right_image.width }}"
+            height="{{ block.settings.right_image.height }}"
+          >
+        {% else %}
+          <div class="ai-split-hero-bg-placeholder-{{ ai_gen_id }}">
+            {{ 'hero-apparel-1' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+        <div class="ai-split-hero-overlay-{{ ai_gen_id }}"></div>
+        <div class="ai-split-hero-content-{{ ai_gen_id }}">
+          {% if block.settings.right_text != blank %}
+            <p class="ai-split-hero-text-{{ ai_gen_id }}">{{ block.settings.right_text }}</p>
+          {% endif %}
+          {% if block.settings.right_button_text != blank %}
+            <a
+              href="{{ block.settings.right_button_link }}"
+              class="ai-split-hero-button-{{ ai_gen_id }} ai-split-hero-button-outline-{{ ai_gen_id }}"
+            >
+              {{ block.settings.right_button_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</split-hero-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class SplitHero{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.columns = this.querySelectorAll('.ai-split-hero-column-{{ ai_gen_id }}');
+        this.setupAccessibility();
+      }
+
+      setupAccessibility() {
+        this.columns.forEach((column) => {
+          column.setAttribute('role', 'region');
+        });
+      }
+    }
+
+    customElements.define('split-hero-{{ ai_gen_id }}', SplitHero{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Split hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top section"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Pasirinkite savo kryptį"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Rinkkitės iš paruoštų unikalų dizainų arba tapkite kūrėju patys."
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#00ffff"
+    },
+    {
+      "type": "header",
+      "content": "Left column"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Background image"
+    },
+    {
+      "type": "textarea",
+      "id": "left_text",
+      "label": "Overlay text",
+      "default": "Mūsų geriausi darbai, paruošti jūsų namų sienoms."
+    },
+    {
+      "type": "text",
+      "id": "left_button_text",
+      "label": "Button text",
+      "default": "EITI Į KOLEKCIJĄ"
+    },
+    {
+      "type": "url",
+      "id": "left_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Right column"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Background image"
+    },
+    {
+      "type": "textarea",
+      "id": "right_text",
+      "label": "Overlay text",
+      "default": "Turite savo viziją? Sukurkite unikalų paveikslą pagal individualų užsakymą."
+    },
+    {
+      "type": "text",
+      "id": "right_button_text",
+      "label": "Button text",
+      "default": "SUSIKURK SAVO"
+    },
+    {
+      "type": "url",
+      "id": "right_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Header bottom spacing",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "subheading_spacing",
+      "label": "Subheading spacing",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column gap (desktop)",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_column_gap",
+      "label": "Column gap (mobile)",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "column_height",
+      "label": "Column height (desktop)",
+      "min": 300,
+      "max": 700,
+      "step": 20,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "mobile_column_height",
+      "label": "Column height (mobile)",
+      "min": 250,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Content padding",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "overlay_text_color",
+      "label": "Overlay text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "overlay_text_size",
+      "label": "Overlay text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity_top",
+      "label": "Overlay opacity (top)",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity_bottom",
+      "label": "Overlay opacity (bottom)",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.8
+    },
+    {
+      "type": "header",
+      "content": "Filled button (left)"
+    },
+    {
+      "type": "color",
+      "id": "filled_button_bg",
+      "label": "Background",
+      "default": "#00ffff"
+    },
+    {
+      "type": "color",
+      "id": "filled_button_text",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "filled_button_hover_bg",
+      "label": "Hover background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "filled_button_hover_text",
+      "label": "Hover text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Outline button (right)"
+    },
+    {
+      "type": "color",
+      "id": "outline_button_text",
+      "label": "Text",
+      "default": "#00ffff"
+    },
+    {
+      "type": "color",
+      "id": "outline_button_border",
+      "label": "Border",
+      "default": "#00ffff"
+    },
+    {
+      "type": "color",
+      "id": "outline_button_hover_bg",
+      "label": "Hover background",
+      "default": "#00ffff"
+    },
+    {
+      "type": "color",
+      "id": "outline_button_hover_text",
+      "label": "Hover text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "outline_button_hover_border",
+      "label": "Hover border",
+      "default": "#00ffff"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Vertical padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "text_button_spacing",
+      "label": "Text to button spacing",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Hover effects"
+    },
+    {
+      "type": "color",
+      "id": "glow_color",
+      "label": "Glow color",
+      "default": "#00ffff"
+    },
+    {
+      "type": "range",
+      "id": "glow_intensity",
+      "label": "Glow intensity",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split hero"
+    }
+  ],
+  "tag": null
+}
 {% endschema %}
