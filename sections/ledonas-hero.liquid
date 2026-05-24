@@ -1,0 +1,248 @@
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#050510;
+color:white;
+overflow-x:hidden;
+}
+
+.section-ledonas{
+min-height:100vh;
+padding:60px 8%;
+background:
+radial-gradient(circle at top,#1b2735 0%,#090a0f 40%,#000 100%);
+}
+
+.logo{
+font-size:60px;
+font-weight:900;
+text-transform:uppercase;
+margin-bottom:20px;
+line-height:1;
+}
+
+.logo span:nth-child(1){
+color:#ff00ff;
+text-shadow:0 0 20px #ff00ff;
+}
+
+.logo span:nth-child(2){
+color:#00ff88;
+text-shadow:0 0 20px #00ff88;
+}
+
+.logo span:nth-child(3){
+color:#00ffff;
+text-shadow:0 0 20px #00ffff;
+}
+
+.hero{
+display:grid;
+grid-template-columns:1fr 1fr;
+align-items:center;
+gap:60px;
+min-height:90vh;
+}
+
+.hero-text p{
+font-size:18px;
+line-height:1.8;
+color:#d0d0d0;
+margin-bottom:30px;
+max-width:600px;
+}
+
+.btn{
+display:inline-block;
+padding:18px 40px;
+border:2px solid #00ffff;
+border-radius:14px;
+text-decoration:none;
+color:white;
+font-weight:bold;
+background:rgba(0,255,255,.08);
+box-shadow:0 0 25px rgba(0,255,255,.5);
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-4px);
+box-shadow:0 0 35px #ff00ff;
+border-color:#ff00ff;
+}
+
+.hero-image{
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.rgb-frame{
+width:420px;
+height:620px;
+border:4px solid #00ffff;
+border-radius:20px;
+overflow:hidden;
+position:relative;
+box-shadow:0 0 50px rgba(0,255,255,.7);
+background:#000;
+}
+
+.rgb-frame::before{
+content:'';
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle,#00ffff 0%,#001015 30%,#000 70%);
+animation:spin 10s linear infinite;
+}
+
+@keyframes spin{
+from{
+transform:rotate(0deg) scale(1);
+}
+to{
+transform:rotate(360deg) scale(1.2);
+}
+}
+
+.products{
+margin-top:100px;
+}
+
+.products h2{
+font-size:42px;
+margin-bottom:40px;
+text-shadow:0 0 15px #ff00ff;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(0,255,255,.3);
+border-radius:20px;
+padding:18px;
+transition:.3s;
+backdrop-filter:blur(10px);
+}
+
+.card:hover{
+transform:translateY(-10px);
+border-color:#ff00ff;
+box-shadow:0 0 35px rgba(255,0,255,.4);
+}
+
+.card-image{
+height:300px;
+border-radius:16px;
+margin-bottom:20px;
+background:linear-gradient(135deg,#00ffff,#ff00ff);
+}
+
+.card h3{
+margin-bottom:10px;
+font-size:22px;
+}
+
+.price{
+color:#00ff88;
+font-size:24px;
+font-weight:bold;
+text-shadow:0 0 10px #00ff88;
+}
+
+@media(max-width:900px){
+
+.hero{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+.logo{
+font-size:42px;
+}
+
+.rgb-frame{
+width:100%;
+max-width:340px;
+height:500px;
+}
+
+}
+</style>
+
+<section class="section-ledonas">
+
+<div class="hero">
+
+<div class="hero-text">
+
+<div class="logo">
+<span>Ateities</span><br>
+<span>Šviesa</span><br>
+<span>Tavo Namuose</span>
+</div>
+
+<p>
+Judantys RGB paveikslai su futuristiniu cyberpunk dizainu.
+Sukurk premium atmosferą savo kambaryje.
+</p>
+
+<a href="/collections/all" class="btn">
+Pirkti dabar
+</a>
+
+</div>
+
+<div class="hero-image">
+<div class="rgb-frame"></div>
+</div>
+
+</div>
+
+<div class="products">
+
+<h2>RGB Kolekcija</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="card-image"></div>
+<h3>Cyber Portalas</h3>
+<div class="price">€129</div>
+</div>
+
+<div class="card">
+<div class="card-image" style="background:linear-gradient(135deg,#ff0000,#330000)"></div>
+<h3>Raudonas Neon</h3>
+<div class="price">€149</div>
+</div>
+
+<div class="card">
+<div class="card-image" style="background:linear-gradient(135deg,#00ffff,#001133)"></div>
+<h3>Mėlyna Energija</h3>
+<div class="price">€139</div>
+</div>
+
+<div class="card">
+<div class="card-image" style="background:linear-gradient(135deg,#bb00ff,#220033)"></div>
+<h3>Kosmoso Srautas</h3>
+<div class="price">€159</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
