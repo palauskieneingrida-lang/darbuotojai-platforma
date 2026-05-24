@@ -1,5 +1,4 @@
 
-
 {% liquid
   assign product = closest.product
 -%}
@@ -8,7 +7,16 @@
   {% content_for 'blocks', closest.product: product %}
 {% endcapture %}
 
+{%- if product -%}
+  <a href="{{ product.url }}" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+{%- endif -%}
+
 {% render 'product-card', children: children, product: product %}
+
+{%- if product -%}
+  </a>
+{%- endif -%}
+
 {% render 'buy-buttons-styles' %}
 {% render 'gift-card-recipient-form-styles' %}
 {% render 'quick-add-styles' %}
