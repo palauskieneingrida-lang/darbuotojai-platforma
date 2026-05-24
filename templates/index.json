@@ -16,7 +16,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h1>Išskirtiniai optinio meno kūriniai jūsų erdvei</h1>",
+            "text": "<h1>Optinis menas jūsų erdvei</h1>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "center",
@@ -42,7 +42,7 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Paveikslai",
+            "label": "Žiūrėti kolekciją",
             "link": "shopify://collections/all",
             "open_in_new_tab": false,
             "style_class": "button",
